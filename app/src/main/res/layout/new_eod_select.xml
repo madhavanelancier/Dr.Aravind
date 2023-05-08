@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/front"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/border_dup"
+        android:drawableLeft="@drawable/ic_front_sheet"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center|start"
+        android:padding="10dp"
+        android:singleLine="false"
+        android:text="Front Sheet"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="16sp"
+        android:onClick="openFRONT"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/textView49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
+    <TextView
+        android:id="@+id/front2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/border_dup"
+        android:drawableLeft="@drawable/ic_videoconference"
+        android:drawablePadding="8dp"
+        android:onClick="openEOD"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center|start"
+        android:padding="10dp"
+        android:singleLine="false"
+        android:text="Minutes of Customer Meetings"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/textView49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
+</LinearLayout>

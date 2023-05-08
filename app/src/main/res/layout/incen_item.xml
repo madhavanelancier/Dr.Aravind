@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Quantity (Kg)"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/qty"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView33"
+            app:layout_constraintStart_toStartOf="@+id/qty"
+            app:layout_constraintTop_toTopOf="@+id/textView33" />
+
+        <EditText
+            android:id="@+id/qty"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+
+            android:layout_marginStart="8dp"
+            android:background="@drawable/roundedittxt"
+            android:gravity="center"
+            android:hint="Quantity"
+            android:inputType="text|numberDecimal"
+            android:textColor="@color/gen_black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/close"
+            app:layout_constraintStart_toEndOf="@+id/pplam1"
+            app:layout_constraintTop_toBottomOf="@+id/textView35"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+
+            android:gravity="center"
+            android:text="Type of plant"
+            app:layout_constraintEnd_toEndOf="@+id/pplam1"
+            app:layout_constraintStart_toStartOf="@+id/pplam1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+
+            android:text="Harvest Date"
+            app:layout_constraintEnd_toEndOf="@+id/pplp1"
+            app:layout_constraintStart_toStartOf="@+id/pplp1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Date Seeded"
+            app:layout_constraintEnd_toEndOf="@+id/centres"
+            app:layout_constraintStart_toStartOf="@+id/centres"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pplp1"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/roundedittxt"
+            android:gravity="center"
+            android:hint="Date"
+            android:inputType="number"
+            android:textColor="@color/gen_black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pplam1"
+            app:layout_constraintStart_toEndOf="@+id/centres"
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+        <Spinner
+            android:id="@+id/pplam1"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/spinnerstyles"
+            android:gravity="center"
+            android:hint="Plant"
+            android:inputType="textPersonName|text"
+            android:textColor="@color/gen_black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/qty"
+            app:layout_constraintStart_toEndOf="@+id/pplp1"
+            app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/transparent"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/qty"
+            app:layout_constraintTop_toTopOf="@+id/textView35"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_cancel"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/centres"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center|top"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/roundedittxt"
+            android:gravity="center"
+            android:hint="Date"
+            android:textColor="@color/gen_black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pplp1"
+            app:layout_constraintEnd_toStartOf="@+id/pplp1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView31"
+            app:layout_constraintVertical_bias="0.272" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

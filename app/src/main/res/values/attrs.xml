@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ShimmerView">
+        <attr name="reflectionColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="SubtitleCollapsingToolbar">
+        <attr name="subtitle" />
+        <attr name="collapsedSubtitleAppearance" format="reference"/>
+        <attr name="expandedSubtitleAppearance" format="reference"/>
+    </declare-styleable>
+
+    <style name="custSpinKitView">
+        <item name="android:indeterminateOnly">true</item>
+        <item name="android:minWidth">24dip</item>
+        <item name="android:maxWidth">24dip</item>
+        <item name="android:minHeight">24dip</item>
+        <item name="android:maxHeight">24dip</item>
+        <item name="SpinKit_Style">Wave</item>
+    </style>
+
+    <declare-styleable name="SuperSlidingPaneLayout">
+        <attr name="mode">
+            <enum name="default_" value="0"/>
+            <enum name="translation" value="1" />
+            <enum name="scale_menu" value="2" />
+            <enum name="scale_panel" value="3" />
+            <enum name="scale_both" value="4" />
+            <enum name="translation_scale" value="5" />
+        </attr>
+        <attr name="compat_sliding" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="SlidingUpPanelLayout">
+        <attr name="panelHeight" format="dimension" />
+        <attr name="slidePanelOffset" format="dimension" />
+        <attr name="shadowHeight" format="dimension" />
+        <attr name="paralaxOffset" format="dimension" />
+        <attr name="directOffset" format="boolean" />
+        <attr name="fadeColor" format="color" />
+        <attr name="flingVelocity" format="integer" />
+        <attr name="dragView" format="reference" />
+        <attr name="dragViewClickable" format="boolean" />
+        <attr name="overlay" format="boolean"/>
+        <attr name="anchorPoint" format="float" />
+        <attr name="initialState" format="enum">
+            <enum name="expanded" value="0" />
+            <enum name="collapsed" value="1" />
+            <enum name="anchored" value="2" />
+            <enum name="hidden" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="PagerSlidingTabStrip">
+        <attr name="pstsIndicatorColor" format="color" />
+        <attr name="pstsUnderlineColor" format="color" />
+        <attr name="pstsDividerColor" format="color" />
+        <attr name="pstsIndicatorHeight" format="dimension" />
+        <attr name="pstsUnderlineHeight" format="dimension" />
+        <attr name="pstsDividerPadding" format="dimension" />
+        <attr name="pstsTabPaddingLeftRight" format="dimension" />
+        <attr name="pstsScrollOffset" format="dimension" />
+        <attr name="pstsTabBackground" format="reference" />
+        <attr name="pstsShouldExpand" format="boolean" />
+        <attr name="pstsTextAllCaps" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="GifTextureView"><attr format="reference|string" name="gifSource"/><attr format="boolean" name="isOpaque"/></declare-styleable>
+    <declare-styleable name="GifView"><attr format="boolean" name="freezesAnimation"/></declare-styleable>
+
+    <declare-styleable name="RowLayout">
+        <attr name="android:verticalSpacing" />
+        <attr name="android:horizontalSpacing" />
+    </declare-styleable>
+
+    <!--<declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>-->
+    <declare-styleable name="CircleIndicator">
+        <attr name="ci_width" format="dimension"/>
+        <attr name="ci_height" format="dimension"/>
+        <attr name="ci_margin" format="dimension"/>
+        <attr name="ci_animator" format="reference"/>
+        <attr name="ci_animator_reverse" format="reference"/>
+        <attr name="ci_drawable" format="reference"/>
+        <attr name="ci_drawable_unselected" format="reference"/>
+    </declare-styleable>
+
+</resources>

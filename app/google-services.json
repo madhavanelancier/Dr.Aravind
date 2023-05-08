@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "429400604551",
+    "firebase_url": "https://vanithamarketing-7301b.firebaseio.com",
+    "project_id": "vanithamarketing-7301b",
+    "storage_bucket": "vanithamarketing-7301b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:429400604551:android:bb10050cb57966fde61d22",
+        "android_client_info": {
+          "package_name": "com.elancier.meenatchi_CRM"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "429400604551-gliqd79t4nf7iqescdafm3bfcj4gq7vi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2X6DG3L-u4I6dHv_PIF_MLeffRFAU094"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "429400604551-gliqd79t4nf7iqescdafm3bfcj4gq7vi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:paddingTop="8dp"
+            android:text="Feedback"
+            android:textAllCaps="false"
+            android:textColor="#119585"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/imageButton11"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/fui_transparent"
+            app:srcCompat="@drawable/ic_cancel_close" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textView15vcut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:lineSpacingExtra="8sp"
+        android:paddingTop="4sp"
+        android:text="Feedback"
+        android:textAllCaps="false"
+        android:textColor="#3F51B5"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView15vtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:paddingTop="4sp"
+        android:text="Feedback"
+        android:textAllCaps="false"
+        android:textColor="@color/blue_300"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/textView22"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/gray"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="No feedbacks found."
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/sroll"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal|end"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+
+                android:gravity="right|end"
+                android:visibility="gone" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/feedlist"
+                android:layout_width="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/download"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="DOWNLOAD"
+                    android:textColor="#119585"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/agree"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="CLOSE"
+                    android:textColor="#119585"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView88"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="TextView"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/viewfile"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Open file"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+            <!--<TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="30 வருடமாக காரைக்குடியில் சிவகெங்கை மாவட்டங்களில் மோதிர புகழ் பெற்ற ஆசாரி"
+                android:textColor="#454545"
+                android:textSize="15dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="K.செல்வராஜ்"
+                android:textColor="#333333"
+                android:textSize="19dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="4dp"
+                android:paddingTop="4dp"
+                android:text="94433 51703\nகாரைக்குடி."
+                android:textColor="#333333"
+                android:textSize="16dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:lineSpacingExtra="4dp"
+                android:text="        எந்த டிசைனாக இருந்தாலும் குறிப்பிட்ட நேரங்களில் தரமான முறையில் செய்து தரப்படும்.
+உங்களுக்கு தேவையான அனைத்து விதமான நகைகளும் தரமான முறையில் செய்து தரப்படும் என்பதை பெருமிதத்துடன் தெரிவித்துக் கொள்கிறோம்."
+                android:textColor="#454545"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="எங்களுடைய  தனிச்சிறப்புகள்"
+                android:textColor="@color/red"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="1.தங்க நகைகளுக்கு செய்கூலி மற்றும் சேதாரம் கிடையாது."
+                android:textColor="#666666"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="2.வெள்ளி  பொருட்களுக்கு 15 சதவிதம் வரை தள்ளுபடி உண்டு ."
+                android:textColor="#666666"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="1.நகைகளுக்கு செய்கூலி சேதாரம் இல்லை."
+                android:textColor="#666666"
+                android:textSize="14dp"
+                android:visibility="gone" />-->
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.elancier.meenatchi_CRM">
+
+    <dist:module dist:instant="true" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.GPS_PROVIDER" />
+    <uses-permission android:name="android.permission.NETWORK_PROVIDER" />
+    <uses-permission android:name="android.permission.PASSIVE_PROVIDER" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:name=".TestApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/AppThemes"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:icon">
+
+        <activity
+            android:name=".Frontsheet"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".NewEODSelect"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".ExpenseAdd"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".CustomersListbyCity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".AdvanceRequest"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Add_Eod"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Eod_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Plant_report"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Web_Report"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Report_Dashboard"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name=".Fish_report_list"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Plant_Harvest_report"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Family_report"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Family.Harvest_Family"
+            android:theme="@style/AppThemes" />
+
+        <meta-data
+            android:name="CLOUDINARY_URL"
+            android:value="cloudinary://@elancier-solutions" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <service
+            android:name=".service.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".Family_List"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Family.Family_Main"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Contact_Us"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Forgot_Password"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Search_Activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Splashscreen"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Harvest.Harvest_Main" />
+        <activity
+            android:name=".Branch_List"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".Fish_report"
+            android:theme="@style/AppThemes" />
+        <activity android:name=".Verify_Activity" />
+        <activity
+            android:name=".Customers_List"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".TourplanReport"
+            android:theme="@style/AppThemesnew" />
+        <activity
+            android:name=".Request_Add"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Request_List"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Customer_Add"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Profile_update"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".EOD_Customers_List"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name="com.elancier.vanithamarket.Prolist"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".FullView"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Transaction_List"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Credit_List"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Schedule_Meeting"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Meeting_Add"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Patient_Add"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+        <activity android:name=".Travel_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes"
+            />
+        <activity android:name=".Patient_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes"/>
+
+        <activity android:name=".GetLocation_Admin"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes"/>
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+        <service
+            android:name=".service.FetchAddressIntentService"
+            android:exported="false" />
+
+        <provider
+            android:name=".GenericFileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+    </application>
+
+</manifest>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Quantity "
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView33"
+            app:layout_constraintTop_toTopOf="@+id/textView33" />
+
+        <EditText
+            android:id="@+id/qty"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/roundedittxt"
+            android:gravity="center"
+            android:hint="Quantity"
+            android:inputType="number"
+            android:textColor="@color/gen_black"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pplam1"
+            app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="Type of plant"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/textView35"
+            app:layout_constraintStart_toStartOf="@+id/pplam1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginRight="22dp"
+            android:gravity="center"
+            android:text="Quantity (kg)"
+            app:layout_constraintEnd_toEndOf="@+id/pplp1"
+            app:layout_constraintEnd_toStartOf="@+id/close"
+            app:layout_constraintStart_toEndOf="@+id/textView31"
+            app:layout_constraintStart_toStartOf="@+id/pplp1"
+            app:layout_constraintTop_toTopOf="@+id/textView31" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Harvest \nDate"
+            app:layout_constraintEnd_toEndOf="@+id/centres"
+            app:layout_constraintStart_toStartOf="@+id/centres"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3f"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Installed \nDate"
+            app:layout_constraintEnd_toEndOf="@+id/centresseed"
+            app:layout_constraintStart_toStartOf="@+id/centresseed"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/pplp1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|top"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/roundedittxt"
+            android:gravity="center"
+            android:hint="Quantity"
+            android:inputType="text|numberDecimal"
+            android:textColor="@color/gen_black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/close"
+            app:layout_constraintStart_toEndOf="@+id/centres"
+            app:layout_constraintTop_toBottomOf="@+id/textView32"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/pplam1"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/roundedittxt"
+            android:gravity="center"
+            android:hint="Plant"
+            android:inputType="textPersonName|text"
+            android:textColor="@color/gen_black"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/qty"
+            app:layout_constraintStart_toEndOf="@+id/pplp1"
+            app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@android:color/transparent"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/pplp1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pplp1"
+            app:layout_constraintTop_toTopOf="@+id/textView32"
+            app:srcCompat="@drawable/ic_cancel"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/centres"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|top"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/roundedittxt"
+            android:gravity="center"
+            android:hint="Date"
+            android:text="10-02-2020"
+            android:textColor="@color/gen_black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pplp1"
+            app:layout_constraintStart_toEndOf="@+id/centresseed"
+            app:layout_constraintTop_toBottomOf="@+id/textView31"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/centresseed"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|top"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/roundedittxt"
+            android:gravity="center"
+            android:hint="Date"
+            android:textColor="@color/gen_black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pplp1"
+            app:layout_constraintEnd_toStartOf="@+id/centres"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3f"
+            app:layout_constraintVertical_bias="0.272" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

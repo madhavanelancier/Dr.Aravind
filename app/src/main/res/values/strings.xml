@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">Dr.Aravind</string>
+    <string name="forgot">Forgot Password? </string>
+
+    <string-array name="health">
+        <item>-SELECT-</item>
+        <item>Injuries</item>
+        <item>Disabled</item>
+        <item>Surgery</item>
+        <item>Illness</item>
+    </string-array>
+    <string-array name="custtype">
+        <item>-SELECT-</item>
+        <item>Existing</item>
+        <item>New</item>
+    </string-array>
+    <string-array name="requesttype">
+        <item>-SELECT-</item>
+        <item>Request Type</item>
+    </string-array>
+    <string-array name="meal">
+        <item>BREAKFAST</item>
+        <item>LUNCH</item>
+        <item>DINNER</item>
+    </string-array>
+    <string-array name="travelby">
+        <item>BUS</item>
+        <item>TRAIN</item>
+        <item>CAB</item>
+        <item>AUTO</item>
+    </string-array>
+    <string-array name="season">
+        <item>-SELECT-</item>
+        <item>Off Season</item>
+        <item>Mid Season</item>
+        <item>Season</item>
+    </string-array>
+    <string-array name="custpros">
+        <item>-SELECT-</item>
+        <item>Hot</item>
+        <item>Cold</item>
+        <item>Warm</item>
+    </string-array>
+
+    <string-array name="occup">
+        <item>-SELECT-</item>
+        <item>Plumber</item>
+        <item>Carpenter</item>
+        <item>Mechanic</item>
+        <item>Centring</item>
+        <item>Housewife</item>
+        <item>Electrician</item>
+        <item>Shepard</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="income">
+        <item>-SELECT-</item>
+        <item>Daily wages</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+        <item>Season</item>
+    </string-array>
+
+    <string-array name="plants">
+        <item>-SELECT-</item>
+        <item>Stem Lettuce</item>
+        <item>Tomato’s</item>
+        <item>Cucumber</item>
+        <item>Spinaches</item>
+        <item>Capsicum</item>
+        <item>Chilli</item>
+        <item>Mustard</item>
+        <item>Flower plants</item>
+        <item>Bitter guard</item>
+        <item>Leafy greens</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="relation">
+        <item>-SELECT-</item>
+        <item>Mother</item>
+        <item>Father</item>
+        <item>Wife</item>
+        <item>Son</item>
+        <item>Daughter</item>
+        <item>Brother</item>
+        <item>Sister</item>
+        <item>Father-In-Law</item>
+        <item>Mother-In-Law</item>
+        <item>Brother-In-Law</item>
+        <item>Sister-In-Law</item>
+        <item>Nephew</item>
+        <item>Uncle</item>
+        <item>Aunty</item>
+        <item>Grandmother</item>
+        <item>Grandfather</item>
+
+    </string-array>
+
+
+</resources>

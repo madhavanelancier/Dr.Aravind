@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/member_details"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="15dp"
+                    android:text="Create Order"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gen_black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/close"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/float_transparent"
+                    app:srcCompat="@drawable/ic_cancel_close" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:text="Name"
+                    android:textColor="#555555"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/fname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/linear_back"
+                    android:gravity="left"
+                    android:inputType="textPersonName|textCapWords"
+                    android:minWidth="50dp"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="#212121"
+                    android:textSize="16sp"
+                    app:fontFamily="ubuntu_regular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:text="Brand"
+                    android:textColor="#555555"
+                    android:textSize="15sp" />
+
+                <Spinner
+                    android:id="@+id/frelation"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinnerstyle_blue"
+                    android:gravity="left"
+
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="#212121"
+                    android:textSize="16sp"
+                    app:fontFamily="ubuntu_regular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:text="Age"
+                    android:textColor="#555555"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/fage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/linear_back"
+                    android:digits="1234567890"
+                    android:gravity="left"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:minWidth="50dp"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="#212121"
+                    android:textSize="16sp"
+                    app:fontFamily="ubuntu_regular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:text="School Level"
+                    android:textColor="#555555"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/school"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/linear_back"
+                    android:gravity="left"
+                    android:inputType="textPersonName"
+                    android:minWidth="50dp"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text="Nil"
+                    android:textColor="#212121"
+                    android:textSize="16sp"
+                    app:fontFamily="ubuntu_regular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:text="Occuption"
+                    android:textColor="#555555"
+                    android:textSize="15sp" />
+
+                <Spinner
+                    android:id="@+id/foccuption"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinnerstyle_blue"
+                    android:entries="@array/occup"
+                    android:gravity="left"
+                    android:inputType="text|textCapCharacters"
+                    android:minWidth="50dp"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="#212121"
+                    android:textSize="16sp"
+                    app:fontFamily="ubuntu_regular" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:text="Monthly Income"
+                    android:textColor="#555555"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/fincome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/linear_back"
+                    android:digits="1234567890"
+                    android:gravity="left"
+                    android:inputType="textPersonName"
+                    android:minWidth="50dp"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text="Nil"
+                    android:textAllCaps="true"
+                    android:textColor="#212121"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/roboto_medium" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:text="Product"
+                    android:textColor="#555555"
+                    android:textSize="15sp" />
+
+
+                <Spinner
+                    android:id="@+id/mmarital"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/spinnerstyle_blue"
+                    android:minWidth="50dp"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:textColor="#212121"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/roboto" />
+
+                <TextView
+                    android:id="@+id/relerrormarital"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <!--<EditText
+            android:id="@+id/mrelign"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/linear_back"
+            android:gravity="left"
+            android:inputType="textNoSuggestions|text|textCapWords"
+            android:minWidth="50dp"
+            android:padding="8dp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="#212121"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto" />-->
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/healthdedclay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:text="Health issue Description"
+                    android:textColor="#555555"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/mvoterid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/linear_back"
+                    android:gravity="left"
+                    android:inputType="text"
+                    android:minWidth="50dp"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="#212121"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/roboto" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:text="Future Goal"
+                    android:textColor="#555555"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/future"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/linear_back"
+                    android:gravity="left"
+                    android:inputType="text"
+                    android:minWidth="50dp"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="#212121"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/roboto" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+
+                    android:layout_margin="8dp"
+                    android:background="@drawable/rectangle_green_dup"
+                    android:text="Add"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
