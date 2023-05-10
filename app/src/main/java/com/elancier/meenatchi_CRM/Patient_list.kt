@@ -14,11 +14,15 @@ import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.view.MenuItemCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.elancier.meenatchi_CRM.Adapers.PatientAdap
+import com.elancier.meenatchi_CRM.DataClass.OrderDetail
 import com.elancier.meenatchi_CRM.retrofit.*
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_branch__list.*
 import kotlinx.android.synthetic.main.activity_eod_list.*
+import kotlinx.android.synthetic.main.activity_eod_list.swiperefresh
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
@@ -36,7 +40,11 @@ class Patient_list : AppCompatActivity(),PatientAdap.OnItemClickListener {
     internal  var pref: SharedPreferences?=null
     internal  var editor: SharedPreferences.Editor?=null
     lateinit var adp : PatientAdap
+    lateinit var adpdup : PatientAdap
+    var eodlistsdup = java.util.ArrayList<EOD_data>()
     var eodlists = ArrayList<EOD_data>()//JSONArray()
+    lateinit var searchView:SearchView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient_list)
@@ -49,21 +57,28 @@ class Patient_list : AppCompatActivity(),PatientAdap.OnItemClickListener {
         editor = pref!!.edit()
 
 
-        val layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
-        recyclerview.layoutManager = layoutManager
+        recyclerview.setLayoutManager(LinearLayoutManager(this));
 
 
         adp = PatientAdap(activity,eodlists,activity)
         recyclerview.adapter = adp
 
+        adpdup = PatientAdap(activity,eodlistsdup,activity)
+        recyclerview.adapter = adpdup
+
         add.setOnClickListener {
             startActivity(Intent(this,Patient_Add::class.java))
         }
 
-      /*  add.setOnClickListener {
+        swiperefresh.setOnRefreshListener {
+            getEODs("")
+            // This method performs the actual data-refresh operation.
+            // The method calls setRefreshing(false) when it's finished.
+        }
+
+        /* add.setOnClickListener {
             startActivity(
-                Intent(activity, Schedule_Meeting::class.java)
-            )
+                Intent(activity, Schedule_Meeting::class.java))
         }*/
 
        /* srchtxt.setOnKeyListener { view, i, keyEvent ->
@@ -80,20 +95,16 @@ class Patient_list : AppCompatActivity(),PatientAdap.OnItemClickListener {
             srchtxt.setText("")
             getEODs("")
         }
-        swiperefresh.setOnRefreshListener {
-            Log.i("refresh", "onRefresh called from SwipeRefreshLayout")
-            srchtxt.setText("")
-            getEODs("")
-            // This method performs the actual data-refresh operation.
-            // The method calls setRefreshing(false) when it's finished.
-        }*/
+        */
 
 
     }
 
     override fun onResume() {
         super.onResume()
+        eodlistsdup.clear()
         getEODs("")
+
     }
 
     fun getEODs(search: String){
@@ -114,7 +125,7 @@ class Patient_list : AppCompatActivity(),PatientAdap.OnItemClickListener {
                     Log.e("responce", response.toString())
                     if (response.isSuccessful()) {
                         val example = response.body() as Resp_trip
-                        println(example)
+                        println("Resp "+example)
                         if (example.getStatus() == "Success") {
                             //eodlist = JSONArray()
 
@@ -182,9 +193,107 @@ class Patient_list : AppCompatActivity(),PatientAdap.OnItemClickListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.search, menu)
+        //menuInflater.inflate(R.menu.receipt, menu)
+        val inflater = menuInflater
+        inflater.inflate(R.menu.search, menu)
+        val searchViewItem = menu.findItem(R.id.action_search)
+        searchView = MenuItemCompat.getActionView(searchViewItem) as SearchView
 
+
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.clearFocus()
+                /*   if(list.contains(query)){
+                    adapter.getFilter().filter(query);
+                }else{
+                    Toast.makeText(MainActivity.this, "No Match found",Toast.LENGTH_LONG).show();
+                }*/return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                //adapter.getFilter().filter(newText)
+                eodlistsdup.clear()
+                if(newText!!.length>=3) {
+
+                    if (eodlists.isNotEmpty()) {
+
+                        for (i in 0 until eodlists.size) {
+                            Log.e("pos",eodlists[i].cname.toString())
+                            if (eodlists[i].cname!!.toString().toLowerCase().contains(newText!!.toLowerCase())||
+                                eodlists[i].mmob!!.toString().toLowerCase().contains(newText!!.toLowerCase())||
+                                eodlists[i].doctor!!.toString().toLowerCase().contains(newText!!.toLowerCase())) {
+                                val data= EOD_data()
+                                data.cname = eodlists[i].cname
+                                data.customerID = eodlists[i].customerID.toString()
+                                data.mmob = eodlists[i].mmob.toString()
+                                data.doctor = eodlists[i].doctor.toString()
+                                data.city = eodlists[i].city.toString()
+
+                                eodlistsdup.add(data)
+
+
+                            }
+                            adpdup = PatientAdap(
+                                this@Patient_list,eodlistsdup, activity)
+                            recyclerview.adapter = adpdup
+                            // memberslist.adapter = adp
+
+                            if(eodlistsdup.isEmpty()){
+                                textView23.visibility=View.VISIBLE
+
+                            }
+                            else{
+                                textView23.visibility=View.GONE
+
+                            }
+
+                            /*adp1dup = MyOrderAdap(
+                                CentresArraysdup1,
+                                this@Customers_List,
+                                click1
+                            )
+                            memberslist.adapter = adp1dup
+                            // memberslist.adapter = adp
+                            shimmer_view_container.stopShimmer()
+                            shimmer_view_container.visibility=View.GONE
+
+                            if(CentresArraysdup1.isEmpty()){
+                                textView23.visibility=View.VISIBLE
+
+                            }
+                            else{
+                                textView23.visibility=View.GONE
+
+                            }*/
+                            //}
+                        }
+                    }
+                }
+                else if(newText.length==0){
+                    eodlistsdup.clear()
+                        adp = PatientAdap(
+                            this@Patient_list,
+                            eodlists,
+                            activity!!
+                        )
+                         recyclerview.adapter = adp
+                        // memberslist.adapter = adp
+
+                        if (eodlists.isEmpty()) {
+                            textView23.visibility = View.VISIBLE
+
+                        }
+                        else{
+                            textView23.visibility=View.GONE
+
+                        }
+
+                }
+
+                return false
+            }
+        })
         return true
     }
 
@@ -197,41 +306,6 @@ class Patient_list : AppCompatActivity(),PatientAdap.OnItemClickListener {
         if (id == android.R.id.home) {
             onBackPressed()
             return true
-        }
-
-        if (id == R.id.action_search){
-            var src=""
-            val searchViewItem = item //menu.findItem(R.id.action_search)
-            val searchView = MenuItemCompat.getActionView(searchViewItem) as SearchView
-            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    searchView.clearFocus()
-                    return true
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    //adapter.getFilter().filter(newText)
-                    src = newText!!
-                    if(newText!!.length>=3) {
-                        getEODs(newText.toString())
-                    }
-                    else if(newText.length==0){
-                        getEODs("")
-                    }
-
-                    return true
-                }
-            })
-
-            /*searchView.getChildAt(1).setOnKeyListener { view, i, keyEvent ->
-                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER)) {
-                    if(searchView.query.length>=3) {
-                        getEODs(searchView.query.toString())
-                    }
-                    return@setOnKeyListener true
-                }
-                return@setOnKeyListener false
-            }*/
         }
         return super.onOptionsItemSelected(item)
     }
@@ -279,9 +353,7 @@ class Patient_list : AppCompatActivity(),PatientAdap.OnItemClickListener {
     }
 
     override fun OnItemClick(view: View, position: Int, viewType: Int) {
-        val it = Intent(activity,Add_Eod::class.java)
-        it.putExtra("edit",eodlists[position].jsonobject.toString())
-        startActivity(it)
+
     }
 
     fun filter() {
@@ -358,9 +430,8 @@ class Patient_list : AppCompatActivity(),PatientAdap.OnItemClickListener {
     }
 
     fun adp(){
-        //adp = EODAdap(activity,eodlist,activity)
-        //recyclerview.adapter = adp
-        adp.notifyDataSetChanged()
+        adp = PatientAdap(activity,eodlists,activity)
+        recyclerview.adapter = adp
         if (eodlists.size==0){
             nodata.visibility=View.VISIBLE
         }else{

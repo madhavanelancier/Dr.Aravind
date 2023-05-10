@@ -515,6 +515,9 @@
                                 android:id="@+id/doc_contact"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:maxLines="1"
                                 android:textSize="14sp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -556,7 +559,10 @@
                                 android:id="@+id/hospital_contact"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:textSize="14sp" />
+                                android:textSize="14sp"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:maxLines="1"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 

@@ -171,10 +171,10 @@ class MainActivity : AppCompatActivity() {
             alert.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, i ->
                 dialog.dismiss()
 
-                    dosavecat(
-                        "Check Out",
-                        pref!!.getString("cusid", "").toString()
-                    )
+                dosavecat(
+                    "Check Out",
+                    pref!!.getString("cusid", "").toString()
+                )
 
 
             })
@@ -194,10 +194,10 @@ class MainActivity : AppCompatActivity() {
             alert.setMessage("Are you sure want to checkin?")
             alert.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, i ->
                 dialog.dismiss()
-                    dosavecat(
-                        "Check In",
-                        pref!!.getString("cusid", "").toString()
-                    )
+                dosavecat(
+                    "Check In",
+                    pref!!.getString("cusid", "").toString()
+                )
             })
             alert.setNegativeButton("No", DialogInterface.OnClickListener { dialog, i ->
                 dialog.dismiss()
@@ -239,7 +239,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         docCard.setOnClickListener {
-            if (checkin.visibility==View.GONE) {
+            if (checkin.visibility == View.GONE) {
                 startActivity(
                     Intent(this@MainActivity, Customers_List::class.java).putExtra(
                         "cus",
@@ -253,14 +253,23 @@ class MainActivity : AppCompatActivity() {
 
         }
         meetCard.setOnClickListener {
-            startActivity(
-                Intent(this@MainActivity, Eod_list::class.java).putExtra("cus", "order")
-            )
+            if (checkin.visibility == View.GONE) {
+                startActivity(
+                    Intent(this@MainActivity, Eod_list::class.java).putExtra("cus", "order")
+                )
+            } else {
+                toast("Please Check In")
+            }
+
         }
         patientCard.setOnClickListener {
-            startActivity(
-                Intent(this@MainActivity, Patient_list::class.java)
-            )
+            if (checkin.visibility == View.GONE) {
+                startActivity(
+                    Intent(this@MainActivity, Patient_list::class.java)
+                )
+            } else {
+                toast("Please Check In")
+            }
         }
 
         /*textView56stock.setOnClickListener {
@@ -584,15 +593,14 @@ class MainActivity : AppCompatActivity() {
     fun dosavecat(name: String, id: String) {
         if (lat != 0.0 && longi != 0.0 && district.isNotEmpty()) {
 
-            if(name=="Check In") {
+            if (name == "Check In") {
                 progbar = Dialog(this)
                 progbar.requestWindowFeature(Window.FEATURE_NO_TITLE)
                 progbar.getWindow()!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 progbar.setContentView(R.layout.checkin)
                 progbar.setCancelable(false)
                 progbar.show()
-            }
-            else{
+            } else {
                 progbar = Dialog(this)
                 progbar.requestWindowFeature(Window.FEATURE_NO_TITLE)
                 progbar.getWindow()!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -602,7 +610,7 @@ class MainActivity : AppCompatActivity() {
             }
             val json = JsonObject()
             json.addProperty("user_id", "1"/*pref!!.getString("cusid", "").toString()*/)
-            json.addProperty("type",name)
+            json.addProperty("type", name)
             json.addProperty("location", district)
             json.addProperty("lat", lat.toString())
             json.addProperty("long", longi.toString())
@@ -627,13 +635,12 @@ class MainActivity : AppCompatActivity() {
                             editor!!.putString("long", longi.toString())
                             editor!!.commit()
 
-                            if(name=="Check In"){
-                                checkout.visibility=View.VISIBLE
-                                checkin.visibility=View.GONE
-                            }
-                            else{
-                                checkout.visibility=View.GONE
-                                checkin.visibility=View.VISIBLE
+                            if (name == "Check In") {
+                                checkout.visibility = View.VISIBLE
+                                checkin.visibility = View.GONE
+                            } else {
+                                checkout.visibility = View.GONE
+                                checkin.visibility = View.VISIBLE
                             }
 
 
@@ -1230,8 +1237,10 @@ class MainActivity : AppCompatActivity() {
         loaded = false
         from = intent.extras!!.getString("from").toString()
         textView51.setText("Hello " + pref!!.getString("fname", "").toString())
-        firstletter.setText((pref!!.getString("fname", "").toString().substring(0)
-            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }))
+        firstletter.setText(
+            (pref!!.getString("fname", "").toString().substring(0)
+                .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
+        )
 
         /* if(from=="Employee"){
              front.visibility=View.VISIBLE
@@ -1298,13 +1307,12 @@ class MainActivity : AppCompatActivity() {
                         orderval.setText(resp.patients)
                         baln.setText(resp.meetings)
 
-                        if(resp.check_out.equals("1")){
-                            checkin.visibility=View.GONE
-                            checkout.visibility=View.VISIBLE
-                        }
-                        else{
-                            checkin.visibility=View.VISIBLE
-                            checkout.visibility=View.GONE
+                        if (resp.check_out.equals("1")) {
+                            checkin.visibility = View.GONE
+                            checkout.visibility = View.VISIBLE
+                        } else {
+                            checkin.visibility = View.VISIBLE
+                            checkout.visibility = View.GONE
                         }
 
                         pDialog.dismiss()
@@ -1312,12 +1320,12 @@ class MainActivity : AppCompatActivity() {
                         val min = Calendar.getInstance().get(Calendar.SECOND)
                         println("hour : " + hour + " min : " + min)
 
-                       /* NotificationScheduler.setReminder(
-                            this@MainActivity,
-                            AlarmReceiver::class.java,
-                            hour,
-                            min
-                        )*/
+                        /* NotificationScheduler.setReminder(
+                             this@MainActivity,
+                             AlarmReceiver::class.java,
+                             hour,
+                             min
+                         )*/
 /*
                         if (CheckingPermissionIsEnabledOrNot()) {
                             if (ContextCompat.checkSelfPermission(
@@ -1349,10 +1357,10 @@ class MainActivity : AppCompatActivity() {
                     } else {
 
 
-                    /*    NotificationScheduler.cancelReminder(
-                            this@MainActivity,
-                            AlarmReceiver::class.java
-                        )*/
+                        /*    NotificationScheduler.cancelReminder(
+                                this@MainActivity,
+                                AlarmReceiver::class.java
+                            )*/
 
                         Toast.makeText(
                             this@MainActivity,

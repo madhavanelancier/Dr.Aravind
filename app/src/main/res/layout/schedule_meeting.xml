@@ -136,23 +136,13 @@
                             android:textSize="15sp"
                             android:tint="@color/colorAccent" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-
+                        <AutoCompleteTextView
+                            android:id="@+id/fname"
                             android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="8dp"
-                            android:hint="Doctor Name">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/fname"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:textSize="18sp" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:hint="Enter Doctor Name"
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -162,7 +152,8 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -364,9 +355,10 @@
                             android:hint="Meeting Date / Time">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/address"
+                                android:id="@+id/meeting"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:focusable="false" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 

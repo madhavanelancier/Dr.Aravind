@@ -21,6 +21,14 @@ class Response_trip {
     @Expose
     var state_name: String? = null
 
+    @SerializedName("meeting_datetime")
+    @Expose
+    var meeting_datetime: String? = null
+
+    @SerializedName("doctor")
+    @Expose
+    var doctor: String? = null
+
     @SerializedName("user")
     @Expose
     var user: String? = null

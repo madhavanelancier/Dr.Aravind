@@ -147,9 +147,9 @@ class Customer_Add : AppCompatActivity() {
                 && pinloc.text.toString().trim().isNotEmpty() && address.text.toString().trim()
                     .isNotEmpty()
                 && specialization.selectedItemPosition != 0 && statespin.selectedItemPosition != 0
-                && hospital_contact.text.toString().trim()
-                    .isNotEmpty() && doc_contact.text.toString().trim().isNotEmpty()&&imgCountValid>0
-            ) {
+                && (hospital_contact.text.toString().trim()
+                    .isNotEmpty() && hospital_contact.text.toString().length==10) && (doc_contact.text.toString().trim().isNotEmpty()&&doc_contact.text.toString().length==10)&&imgCountValid>0
+                ) {
 
                 uploadMultiFile()
             } else {
@@ -159,14 +159,15 @@ class Customer_Add : AppCompatActivity() {
                 if (hospitalname.text.toString().trim().isEmpty()) {
                     hospitalname.error = "Required field*"
                 }
-                if (pinloc.text.toString().trim().length < 10) {
+                if (pinloc.text.toString().trim().isEmpty()) {
                     pinloc.error = "Required field*"
                 }
                 if (address.text.toString().trim().isEmpty()) {
                     address.error = "Required field*"
                 }
-                if (doc_contact.text.toString().trim().isEmpty()) {
-                    doc_contact.error = "Required field*"
+
+                if (doc_contact.text.toString().length<10) {
+                    doc_contact.error = "Invalid Mobile Number*"
                 }
                 if (specialization.selectedItemPosition == 0) {
                     toast("Select Specialization")
@@ -174,12 +175,11 @@ class Customer_Add : AppCompatActivity() {
                 if (statespin.selectedItemPosition == 0) {
                     toast("Select City")
                 }
-                if (hospital_contact.text.toString().trim().isEmpty()) {
-                    designtion.error = "Required field*"
+
+                if (hospital_contact.text.toString().length<10) {
+                    hospital_contact.error = "Invalid Mobile Number*"
                 }
-                if (doc_contact.text.toString().trim().isEmpty()) {
-                    designtion.error = "Required field*"
-                }
+
                 if(imgCountValid==0){
                     toast("Please select atleast one image")
 
@@ -251,7 +251,7 @@ class Customer_Add : AppCompatActivity() {
 
     fun selectImage(){
         ImagePicker.with(this)
-            .saveDir(getExternalFilesDir(Environment.DIRECTORY_DCIM)!!)
+            .saveDir(getDatabasePath(Environment.DIRECTORY_PICTURES)!!)
             //.crop()	    			//Crop image(Optional), Check Customization for more option
             .compress(1024)			//Final image size will be less than 1 MB(Optional)
             .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
@@ -325,12 +325,6 @@ class Customer_Add : AppCompatActivity() {
                     if(response.isSuccessful) {
                         Toast.makeText(activity, "Doctor Added Successfully", Toast.LENGTH_SHORT)
                             .show()
-                        startActivity(
-                            Intent(
-                                this@Customer_Add,
-                                Customers_List::class.java
-                            )
-                        )
                         finish()
                     }
                     else{

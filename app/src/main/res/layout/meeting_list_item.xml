@@ -85,13 +85,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_marginBottom="16dp"
                     android:text="01 May 2023 09:00 AM"
                     android:textColor="@color/colorAccent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView87"
                     app:layout_constraintTop_toBottomOf="@+id/textView88" />
 
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="01 May 2023 09:00 AM"
+                    android:textColor="@color/blue_900"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView87"
+                    app:layout_constraintTop_toBottomOf="@+id/textView89" />
                 <ImageButton
                     android:id="@+id/feedback"
                     android:layout_width="40dp"
@@ -100,13 +110,13 @@
                     android:clickable="true"
                     android:tint="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
+                    app:layout_constraintEnd_toStartOf="@+id/edit"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.491"
                     app:srcCompat="@drawable/ic_baseline_feedback_14" />
 
                 <ImageButton
-                    android:id="@+id/floatingActionButton"
+                    android:id="@+id/edit"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="16dp"

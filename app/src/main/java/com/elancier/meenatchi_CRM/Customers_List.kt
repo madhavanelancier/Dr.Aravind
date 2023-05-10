@@ -301,28 +301,21 @@ class Customers_List : AppCompatActivity(), LocationListener {
 
                         for (i in 0 until CentresArrays.size) {
                             Log.e("pos",CentresArrays[i].customer_name.toString())
-                            if (CentresArrays[i].customer_name!!.toString().toLowerCase().contains(newText!!.toLowerCase())) {
-                                var data=OrderDetail()
+                            if (CentresArrays[i].customer_name!!.toString().toLowerCase().contains(newText!!.toLowerCase())||
+                                CentresArrays[i].mobile!!.toString().toLowerCase().contains(newText!!.toLowerCase())||
+                                CentresArrays[i].address!!.toString().toLowerCase().contains(newText!!.toLowerCase())) {
+                                val data= OrderDetail()
                                 data.customer_name = CentresArrays[i].customer_name
                                 data.id = CentresArrays[i].id.toString()
                                 data.mobile = CentresArrays[i].mobile.toString()
                                 data.address = CentresArrays[i].address.toString()
                                 data.city = CentresArrays[i].city.toString()
-                                data.state = ""
+                                data.image = CentresArrays[i].image.toString()
 
-                                data.image =""
-
-                                data.contact_person=""
-                                data.created_at=""
-                                data.updated_at=""
-
-                                if(frm=="customer"||frm=="eod") {
                                     CentresArraysdup.add(data)
-                                }
 
 
                             }
-                            if(frm=="customer"||frm=="eod") {
                                 adpdup = MyCustomerAdap(
                                     CentresArraysdup,
                                     this@Customers_List,
@@ -341,8 +334,7 @@ class Customers_List : AppCompatActivity(), LocationListener {
                                     textView23.visibility=View.GONE
 
                                 }
-                            }
-                            else{
+
                                 /*adp1dup = MyOrderAdap(
                                     CentresArraysdup1,
                                     this@Customers_List,
@@ -361,7 +353,7 @@ class Customers_List : AppCompatActivity(), LocationListener {
                                     textView23.visibility=View.GONE
 
                                 }*/
-                            }
+                            //}
                         }
                     }
                 }
@@ -468,7 +460,7 @@ class Customers_List : AppCompatActivity(), LocationListener {
     }
 
 
-    fun cloudinary(){
+    /*fun cloudinary(){
         if (Appconstants.net_status(this)) {
             val call = ApproveUtils.Get.getcloudinary()
             call.enqueue(object : Callback<Resp_otps> {
@@ -514,81 +506,8 @@ class Customers_List : AppCompatActivity(), LocationListener {
             ).show()
 
         }
-    }
+    }*/
 
-
-
-     fun dosavecat(name:String,id:String) {
-         if(lat!=0.0&&longi!=0.0&&district.isNotEmpty()) {
-             progbar = Dialog(this@Customers_List)
-             progbar.requestWindowFeature(Window.FEATURE_NO_TITLE)
-             progbar.getWindow()!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-             progbar.setContentView(R.layout.checkin)
-             progbar.setCancelable(false)
-             progbar.show()
-             val json = JsonObject()
-             json.addProperty("cus_id", id)
-             json.addProperty("enter_by", pref.getString("empid", "").toString())
-             json.addProperty("location", district)
-             json.addProperty("lat", lat.toString())
-             json.addProperty("long", longi.toString())
-             json.addProperty("type", "Check In")
-             val call = ApproveUtils.Get.check_in(json)
-
-             Log.e("inside", json.toString())
-             call.enqueue(object : Callback<Resp_otp> {
-                 override fun onResponse(call: Call<Resp_otp>, response: Response<Resp_otp>) {
-
-                     Log.v("responce", response.toString())
-                     if (response.isSuccessful) {
-
-
-                         val login = response.body()
-                         //if (!login.getCustomers().isEmpty()) {
-                         Log.e("inssucc", "succ")
-                         if (login!!.status == "Success") {
-                             progbar.dismiss()
-                             //pop!!.dismiss()
-                             toast(login!!.message.toString())
-                             seconddashboard(name, id)
-                             //toast("Village Saved")
-
-
-                         } else {
-                             progbar.dismiss()
-
-                             //Toast.makeText(applicationContext,login.getStatus(), Toast.LENGTH_SHORT).show();
-
-                         }
-                         /*}
-                    else{
-                        //progbar.dismiss();
-
-                        //Toast.makeText(LoginActivity.this, "Bad Credentials", Toast.LENGTH_SHORT).show();
-
-                    }*/
-                     } else {
-                         progbar.dismiss()
-
-                     }
-                 }
-
-
-                 override fun onFailure(call: Call<Resp_otp>, throwable: Throwable) {
-                     Log.e("error", throwable.toString())
-                     //progbar.dismiss();
-                     progbar.dismiss()
-
-                     Toast.makeText(this@Customers_List, "Something went wrong", Toast.LENGTH_SHORT)
-                         .show()
-                 }
-             })
-         }
-         else{
-             toast("Turn on your location and try again.")
-             getLocation()
-         }
-    }
 
     fun toast(msg:String){
         val toast= Toast.makeText(this@Customers_List,msg, Toast.LENGTH_SHORT)

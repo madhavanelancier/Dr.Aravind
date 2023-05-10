@@ -65,6 +65,8 @@ class Meeting_Add : AppCompatActivity() {
 
         val dcname=intent.extras!!.getString("dcname")
         val date=intent.extras!!.getString("date")
+        val status=intent.extras!!.getString("status")
+        val id=intent.extras!!.getString("id")
 
         fname.setText(dcname)
         addresstxt.setText(date)

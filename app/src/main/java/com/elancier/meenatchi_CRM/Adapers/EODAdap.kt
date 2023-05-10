@@ -39,13 +39,25 @@ class EODAdap(private val context: Context, private val CentreArrays: ArrayList<
                 holder.nm.setText(CentreArrays[position].cname.toString())//(CentreArrays.getJSONObject(position).getString("cname"))
                 holder.mob.setText(CentreArrays[position].mmob.toString())//(CentreArrays.getJSONObject(position).getString("mmob"))
                 holder.tval.setText(CentreArrays[position].tval.toString())//(if(CentreArrays.getJSONObject(position).has("tval")) CentreArrays.getJSONObject(position).getString("tval") else "")
+                holder.created.setText(CentreArrays[position].sval.toString())//(if(CentreArrays.getJSONObject(position).has("tval")) CentreArrays.getJSONObject(position).getString("tval") else "")
                 holder.nm.isSelected=true
                 holder.mob.isSelected=true
 
+                holder.edit.setOnClickListener {
+                    context.startActivity(Intent(context,Schedule_Meeting::class.java)
+                        .putExtra("from","Edit")
+                        .putExtra("id",CentreArrays[position].customerID.toString())
+                        .putExtra("dcname",CentreArrays[position].cname.toString())
+                        .putExtra("date",CentreArrays[position].mmob.toString())
+                        .putExtra("status",CentreArrays[position].sval.toString()))
+                }
+
                 holder.feedback.setOnClickListener {
                     context.startActivity(Intent(context,Meeting_Add::class.java)
+                        .putExtra("id",CentreArrays[position].customerID.toString())
                         .putExtra("dcname",CentreArrays[position].cname.toString())
-                        .putExtra("date",CentreArrays[position].mmob.toString()))
+                        .putExtra("date",CentreArrays[position].mmob.toString())
+                        .putExtra("status",CentreArrays[position].sval.toString()))
                 }
             }
             else -> {
@@ -82,7 +94,7 @@ class EODAdap(private val context: Context, private val CentreArrays: ArrayList<
 
         internal lateinit var frmdate: TextView
         internal lateinit var todate: TextView
-        internal lateinit var excnval: TextView
+        internal lateinit var edit: ImageButton
         internal lateinit var newcnval: TextView
         internal lateinit var tidval: TextView
         internal lateinit var textView64: TextView
@@ -94,7 +106,8 @@ class EODAdap(private val context: Context, private val CentreArrays: ArrayList<
             mob = rowView.findViewById(R.id.textView88) as TextView
             tval = rowView.findViewById(R.id.textView89) as TextView
             feedback = rowView.findViewById(R.id.feedback) as ImageButton
-            //created = rowView.findViewById(R.id.created) as TextView
+            edit = rowView.findViewById(R.id.edit) as ImageButton
+            created = rowView.findViewById(R.id.status) as TextView
             /*location = rowView.findViewById(R.id.textView52) as TextView
             pldate = rowView.findViewById(R.id.textView57) as TextView
             targetval = rowView.findViewById(R.id.textView57) as TextView

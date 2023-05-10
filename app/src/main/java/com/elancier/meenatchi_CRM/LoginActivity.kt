@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.drawer_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -83,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-    fun SendLogin(mobile:String,pass:String){
+    fun SendLogin(mobiles:String,pass:String){
 
         pDialog= Dialog(activity)
         Appconstands.loading_show(activity, pDialog).show()
@@ -107,7 +108,7 @@ class LoginActivity : AppCompatActivity() {
                 )
 
         var jsonobj=JsonObject()
-        jsonobj.addProperty("username",mobile)
+        jsonobj.addProperty("username",mobiles)
         jsonobj.addProperty("password",pass)
         jsonobj.addProperty("device_id",device_id)
         jsonobj.addProperty("token",token)
@@ -140,6 +141,8 @@ class LoginActivity : AppCompatActivity() {
                             example.message,
                             Toast.LENGTH_LONG
                         ).show()
+                        mobile.setText("")
+                        password.setText("")
                     }
                 }
                 pDialog.dismiss()

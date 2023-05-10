@@ -243,6 +243,12 @@ interface usr {
 
     @POST("patient/add")
     fun addPatient( @Body fam:JsonObject): Call<ResponseBody?>?
+
+    @POST("meeting/add")
+    fun addMeeting( @Body fam:JsonObject): Call<ResponseBody?>?
+
+    @POST("meeting/edit/{api_key}")
+    fun editMeeting( @Path("api_key")trip : String): Call<ResponseBody?>?
     @FormUrlEncoded
     @POST("profile_update")
     fun getprofile(
@@ -522,6 +528,9 @@ nominee_signature*/
 
     @GET("patient/list/{api_key}")
     fun getPatients(@Path("api_key")trip : String):Call<Resp_trip>
+
+    @GET("meeting/list/{api_key}/{from}/{to}")
+    fun getMeetings(@Path("api_key")trip : String,@Path("from")from : String,@Path("to")to : String):Call<Resp_trip>
 
     @GET("doctor/list/{api_key}")
     fun getcustrips(@Path("api_key")api_key:String):Call<Resp_trip>

@@ -72,7 +72,7 @@ class Patient_Add : AppCompatActivity() {
         pDialog = ProgressDialog(this)
         pDialog!!.setMessage("Processing...")
         pDialog.show()
-        Patients()
+        Doctors()
 
         save.setOnClickListener {
             if (fname.text.toString().trim().isNotEmpty() && husname.text.toString().trim()
@@ -97,7 +97,7 @@ class Patient_Add : AppCompatActivity() {
                 if (wifename.text.toString().trim().isEmpty()) {
                     wifename.error = "Required field*"
                 }
-                if (wife_contact.text.toString().trim().isEmpty()) {
+                if (wife_contact.text.toString().trim().length<10) {
                     wife_contact.error = "Required field*"
                 }
 
@@ -125,7 +125,7 @@ class Patient_Add : AppCompatActivity() {
 
     }
 
-    fun Patients(){
+    fun Doctors(){
         if (Appconstants.net_status(this)) {
             CentresArrays.clear()
             DoctorName.clear()
@@ -222,12 +222,6 @@ class Patient_Add : AppCompatActivity() {
                     if(response.isSuccessful) {
                         Toast.makeText(activity, "Patient Added Successfully", Toast.LENGTH_SHORT)
                             .show()
-                        startActivity(
-                            Intent(
-                                this@Patient_Add,
-                                Patient_list::class.java
-                            )
-                        )
                         finish()
                     }
                     else{
