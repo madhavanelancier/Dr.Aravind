@@ -34,6 +34,7 @@ import kotlinx.android.synthetic.main.drawer_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -142,6 +143,13 @@ class MainActivity : AppCompatActivity() {
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
 
+
+        val calendar = Calendar.getInstance();
+        var dateFormat = SimpleDateFormat("dd/MM/yyyy");
+        val date = dateFormat.format(calendar.getTime());
+        textView83.setText(date)
+
+
         textView55.setOnClickListener {
             startActivity(
                 Intent(this@MainActivity, Customer_Add::class.java)
@@ -159,8 +167,28 @@ class MainActivity : AppCompatActivity() {
                 Intent(this@MainActivity, Meeting_Add::class.java)
             )
             //Editorders(0)
+        }
 
-
+        logoutCard.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Logout?")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton(
+                    "Yes"
+                ) { dialog, which ->
+                    editor!!.putString("name", "")
+                    editor!!.putString("tid", "")
+                    editor!!.putString("fname", "")
+                    editor!!.putString("lname", "")
+                    editor!!.putString("email", "")
+                    editor!!.putString("van_login", "")
+                    editor!!.commit()
+                    startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                    finish()
+                }
+                .setNegativeButton("No", null)
+                .show()
         }
 
 
@@ -173,7 +201,7 @@ class MainActivity : AppCompatActivity() {
 
                 dosavecat(
                     "Check Out",
-                    pref!!.getString("cusid", "").toString()
+                    pref!!.getString("empid", "").toString()
                 )
 
 
@@ -196,7 +224,7 @@ class MainActivity : AppCompatActivity() {
                 dialog.dismiss()
                 dosavecat(
                     "Check In",
-                    pref!!.getString("cusid", "").toString()
+                    pref!!.getString("empid", "").toString()
                 )
             })
             alert.setNegativeButton("No", DialogInterface.OnClickListener { dialog, i ->
@@ -373,27 +401,7 @@ class MainActivity : AppCompatActivity() {
                 .toString()
         )
 
-        logut_lay.setOnClickListener {
-            AlertDialog.Builder(this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Logout?")
-                .setMessage("Are you sure you want to logout?")
-                .setPositiveButton(
-                    "Yes"
-                ) { dialog, which ->
-                    editor!!.putString("name", "")
-                    editor!!.putString("tid", "")
-                    editor!!.putString("fname", "")
-                    editor!!.putString("lname", "")
-                    editor!!.putString("email", "")
-                    editor!!.putString("van_login", "")
-                    editor!!.commit()
-                    startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-                    finish()
-                }
-                .setNegativeButton("No", null)
-                .show()
-        }
+
 
 
         edit.setOnClickListener {
@@ -609,7 +617,7 @@ class MainActivity : AppCompatActivity() {
                 progbar.show()
             }
             val json = JsonObject()
-            json.addProperty("user_id", "1"/*pref!!.getString("cusid", "").toString()*/)
+            json.addProperty("user_id", id/*pref!!.getString("cusid", "").toString()*/)
             json.addProperty("type", name)
             json.addProperty("location", district)
             json.addProperty("lat", lat.toString())
@@ -1293,6 +1301,7 @@ class MainActivity : AppCompatActivity() {
         // pDialog= Dialog(this)
         //Appconstands.loading_show(this, pDialog).show()
 
+        Log.e("mobile",mobile)
         val call = ApproveUtils.Get.getdash(mobile)
         call.enqueue(object : Callback<Resp_otp> {
             override fun onResponse(call: Call<Resp_otp>, response: Response<Resp_otp>) {

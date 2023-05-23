@@ -61,6 +61,10 @@ class Response_trip {
     @Expose
     var clinic: String? = null
 
+    @SerializedName("location_pin")
+    @Expose
+    var location_pin: String? = null
+
     @SerializedName("open_stock")
     @Expose
     var open_stock: String? = null
@@ -118,9 +122,24 @@ class Response_trip {
     @Expose
     var mobile: String? = null
 
+    @SerializedName("specialization")
+    @Expose
+    var specialization: String? = null
+
     @SerializedName("address")
     @Expose
     var address: String? = null
+
+    @SerializedName("doctor_contact_number")
+    @Expose
+    var doctor_contact_number: String? = null
+
+
+    @SerializedName("hospital_contact_number")
+    @Expose
+    var hospital_contact_number: String? = null
+
+
 
     @SerializedName("check_out")
     @Expose

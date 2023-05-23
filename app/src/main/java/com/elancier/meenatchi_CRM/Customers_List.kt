@@ -181,7 +181,8 @@ class Customers_List : AppCompatActivity(), LocationListener {
         getLocation()
 
         add_family.setOnClickListener {
-            startActivity(Intent(this,Customer_Add::class.java))
+            startActivity(Intent(this,Customer_Add::class.java)
+                .putExtra("from","Add"))
         }
 
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
@@ -311,6 +312,7 @@ class Customers_List : AppCompatActivity(), LocationListener {
                                 data.address = CentresArrays[i].address.toString()
                                 data.city = CentresArrays[i].city.toString()
                                 data.image = CentresArrays[i].image.toString()
+                                data.status = CentresArrays[i].status.toString()
 
                                     CentresArraysdup.add(data)
 
@@ -625,6 +627,7 @@ class Customers_List : AppCompatActivity(), LocationListener {
                                 data.mobile = otpval[i].mobile.toString()
                                 data.address = otpval[i].clinic.toString()
                                 data.city = otpval[i].city_name.toString()
+                                data.status = otpval[i].status.toString()
                                 data.image = otpval[i].clinic_photo!![0].toString()
                                 CentresArrays.add(data)
 

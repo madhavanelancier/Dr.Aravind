@@ -480,6 +480,37 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:gravity="start"
+
+                            android:textColor="#555555"
+                            android:textSize="15sp"
+                            android:tint="@color/colorAccent"
+                            app:srcCompat="@drawable/baseline_location_city_24" />
+
+                        <Spinner
+                            android:id="@+id/statespin"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@drawable/spinnerstyle" />
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -104,13 +104,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_marginBottom="16dp"
                     android:text="Rajaji Hospital, Madurai."
                     android:textColor="@color/colorAccent"
                     android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView87"
                     app:layout_constraintTop_toBottomOf="@+id/textView88" />
+
+                <TextView
+                    android:id="@+id/city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:drawableLeft="@drawable/baseline_location_city_24"
+                    android:drawablePadding="8dp"
+                    android:gravity="center|start"
+                    android:text="Rajaji Hospital, Madurai."
+                    android:textColor="@color/blue_800"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    app:drawableTint="@color/colorAccent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView89"
+                    app:layout_constraintTop_toBottomOf="@+id/textView89" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/call"
@@ -127,6 +143,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_phone_24px" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

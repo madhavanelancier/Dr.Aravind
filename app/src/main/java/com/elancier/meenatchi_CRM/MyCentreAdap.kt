@@ -8,12 +8,15 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
+import android.nfc.cardemulation.CardEmulation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.elancier.meenatchi_CRM.DataClass.OrderDetail
@@ -64,8 +67,23 @@ class MyCustomerAdap(private val CentreArrays: List<OrderDetail>, private val co
                 holder.location.setText(CentreArrays[position].address+" , "+CentreArrays[position].city)
                 Glide.with(context).load(CentreArrays[position].image).into(holder.imageView8)
 
-                holder.call.setOnClickListener {
+                if(CentreArrays[position].status=="1"){
+                    holder.excnval.visibility=View.VISIBLE
+                }
+                else{
+                    holder.excnval.visibility=View.GONE
+                }
 
+                holder.viewDoctor.setOnClickListener {
+                    context.startActivity(Intent(context,Customer_Add::class.java)
+                        .putExtra("from","Edit")
+                        .putExtra("id",CentreArrays[position].id))
+                }
+
+                holder.nav.setOnClickListener {
+                    context.startActivity(Intent(context,Customer_Add::class.java)
+                        .putExtra("from","Edit")
+                        .putExtra("id",CentreArrays[position].id))
                 }
                 //holder.daysval.setText(CentreArrays[position].address)
                 //holder.budgetval.setText("Employee - "+CentreArrays[position].contact_person)
@@ -153,7 +171,7 @@ class MyCustomerAdap(private val CentreArrays: List<OrderDetail>, private val co
         internal lateinit var designation: TextView
         internal lateinit var location: TextView
         internal lateinit var imageView8: CircleImageView
-        internal lateinit var call: FloatingActionButton
+        internal lateinit var viewDoctor: ImageButton
         internal lateinit var budgetval: TextView
 
         internal lateinit var frmdate: Button
@@ -161,6 +179,7 @@ class MyCustomerAdap(private val CentreArrays: List<OrderDetail>, private val co
         internal lateinit var excnval: TextView
         internal lateinit var newcnval: TextView
         internal lateinit var tidval: TextView
+        internal lateinit var nav: CardView
 
 
 
@@ -168,9 +187,12 @@ class MyCustomerAdap(private val CentreArrays: List<OrderDetail>, private val co
         init {
 
             docname=rowView.findViewById(R.id.textView87) as TextView
+            docname=rowView.findViewById(R.id.textView87) as TextView
             designation=rowView.findViewById(R.id.textView88) as TextView
             location=rowView.findViewById(R.id.textView89) as TextView
-            call=rowView.findViewById(R.id.call) as FloatingActionButton
+            excnval=rowView.findViewById(R.id.textView86) as TextView
+            nav=rowView.findViewById(R.id.nav) as CardView
+            viewDoctor=rowView.findViewById(R.id.call) as ImageButton
             imageView8=rowView.findViewById(R.id.circleImageView) as CircleImageView
          /*   budgetval=rowView.findViewById(R.id.textView69) as TextView
             frmdate=rowView.findViewById(R.id.button8) as Button

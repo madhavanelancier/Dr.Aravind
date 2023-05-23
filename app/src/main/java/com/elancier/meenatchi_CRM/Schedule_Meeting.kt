@@ -3,6 +3,7 @@ package com.elancier.meenatchi_CRM
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -69,7 +70,6 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
         ab!!.setDisplayShowHomeEnabled(true)
-        ab!!.title = "Schedule Meeting"
 
         pref = applicationContext.getSharedPreferences("MyPref", 0)
         editor = pref!!.edit()
@@ -89,6 +89,14 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
         statespin.adapter=adap
         from=intent.extras!!.getString("from").toString()
 
+        if(from=="Add"){
+            ab!!.title = "Schedule Meeting"
+
+        }
+        else{
+            ab!!.title = "Edit Meeting"
+
+        }
         try {
             val dcname = intent.extras!!.getString("dcname")
             val date = intent.extras!!.getString("date")
@@ -167,6 +175,7 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
             day = calendar[Calendar.DAY_OF_MONTH]
             val datePickerDialog =
                 DatePickerDialog(this@Schedule_Meeting, this@Schedule_Meeting, year, month, day)
+            datePickerDialog.datePicker.setMaxDate(System.currentTimeMillis())
             datePickerDialog.show()
         }
 
@@ -233,7 +242,7 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
 
         val file = File("")
         Log.e("request",builder.toString())
-        val call: Call<ResponseBody?>? = ApproveUtils.Get.editMeeting(editID)
+        val call: Call<ResponseBody?>? = ApproveUtils.Get.editMeeting(editID,builder)
         call!!.enqueue(object : Callback<ResponseBody?> {
             override fun onResponse(
                 call: Call<ResponseBody?>,
@@ -335,7 +344,7 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        exit()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -348,6 +357,20 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
             else -> return super.onOptionsItemSelected(item)
         }
     }
+    fun exit(){
+        val alert=androidx.appcompat.app.AlertDialog.Builder(this)
+        alert.setTitle("Exit?")
+        alert.setMessage("Are you sure want to exit?")
+        alert.setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i ->
+            finish()
+        })
+        alert.setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i ->
+            dialogInterface.dismiss()
+        })
+        val popup=alert.create()
+        popup.show()
+    }
+
 
     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
         myYear = p1
@@ -369,9 +392,16 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
     override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
         myHour = p1;
         myMinute = p2;
-        meeting.setText(myday.toString()+"-" + myMonth.toString() + "-" +
+        var ampm=""
+        if(myHour>=12){
+            ampm="PM"
+        }
+        else if(myHour<12){
+            ampm="AM"
+        }
+        meeting.setText(myday.toString()+"-" + (myMonth+1).toString() + "-" +
             myYear.toString() + " " +
             myHour.toString() + ":" +
-             myMinute.toString());
+             myMinute.toString()+" "+ampm);
     }
 }

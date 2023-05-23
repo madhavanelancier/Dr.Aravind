@@ -8,13 +8,12 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="@color/gen_white"
         app:cardCornerRadius="8dp"
@@ -51,6 +50,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:background="@drawable/rectangle_green_dup"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
                     app:layout_constraintEnd_toEndOf="@+id/circleImageView" />
 
@@ -90,20 +90,18 @@
                     app:layout_constraintStart_toStartOf="@+id/textView87"
                     app:layout_constraintTop_toBottomOf="@+id/textView88" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                <ImageButton
                     android:id="@+id/call"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
+                    android:background="@color/float_transparent"
                     android:clickable="true"
-                    android:tint="@color/white"
-                    android:visibility="gone"
-                    app:fabSize="mini"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_phone_24px" />
+                    app:srcCompat="@drawable/baseline_remove_red_eye_24" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -1,40 +1,37 @@
 package com.elancier.meenatchi_CRM
 
 import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.DatePicker
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuItemCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.elancier.meenatchi_CRM.Adapers.EODAdap
-import com.elancier.meenatchi_CRM.Adapers.PatientAdap
-import com.elancier.meenatchi_CRM.retrofit.*
-import com.google.gson.JsonObject
-import kotlinx.android.synthetic.main.activity_branch__list.*
+import com.elancier.meenatchi_CRM.retrofit.Appconstants
+import com.elancier.meenatchi_CRM.retrofit.ApproveUtils
+import com.elancier.meenatchi_CRM.retrofit.Connection
+import com.elancier.meenatchi_CRM.retrofit.Resp_trip
 import kotlinx.android.synthetic.main.activity_eod_list.*
-import kotlinx.android.synthetic.main.activity_eod_list.swiperefresh
-import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
-class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener {
+class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener,DatePickerDialog.OnDateSetListener  {
     val activity=this
     lateinit var pDialog : Dialog
     internal  var pref: SharedPreferences?=null
@@ -44,7 +41,30 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener {
     lateinit var adpdup : EODAdap
     var eodlistsdup = java.util.ArrayList<EOD_data>()
     lateinit var searchView:SearchView
+    var day = 0
+    var month = 0
+    var year= 0
+    var myHour = 0
+    var myMinute= 0
+    var myYear = 0
+    var myday = 0
+    var myMonth = 0
 
+    var myYear1 = 0
+    var myday1 = 0
+    var myMonth1 = 0
+    var hour= 0
+    var minute= 0
+    var filter=""
+
+    private var fromDate: String? = null
+    private var fromDatePicker: DatePickerDialog? = null
+    private var fromDatePickerListener: OnDateSetListener? = null
+    private var fromDateCalendar: Calendar? = null
+    private var toDate: String? = null
+    private var toDatePicker: DatePickerDialog? = null
+    private var toDatePickerListener: OnDateSetListener? = null
+    private var toDateCalendar: Calendar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_eod_list)
@@ -65,11 +85,85 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener {
         adpdup = EODAdap(activity,eodlistsdup,activity)
         recyclerview.adapter = adpdup
 
+
+        fromDateCalendar = Calendar.getInstance()
+        fromDatePickerListener =
+            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                fromDateCalendar!!.set(Calendar.YEAR, year)
+                fromDateCalendar!!.set(Calendar.MONTH, monthOfYear)
+                fromDateCalendar!!.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                fromDate =
+                    fromDateCalendar!!.get(Calendar.YEAR).toString() + "-" + (fromDateCalendar!!.get(
+                        Calendar.MONTH
+                    ) + 1) + "-" + fromDateCalendar!!.get(Calendar.DAY_OF_MONTH)
+                search_date.setText(fromDate);
+                toDatePicker!!.datePicker.minDate = fromDateCalendar!!.getTimeInMillis()
+            }
+        fromDatePicker = DatePickerDialog(
+            this,
+            fromDatePickerListener,
+            fromDateCalendar!!.get(Calendar.YEAR),
+            fromDateCalendar!!.get(Calendar.MONTH),
+            fromDateCalendar!!.get(Calendar.DAY_OF_MONTH)
+        )
+
+
+        toDateCalendar = Calendar.getInstance()
+        toDatePickerListener =
+            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+
+                toDateCalendar!!.set(Calendar.YEAR, year)
+                toDateCalendar!!.set(Calendar.MONTH, monthOfYear)
+                toDateCalendar!!.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                toDate = toDateCalendar!!.get(Calendar.YEAR).toString() + "-" + (toDateCalendar!!.get(
+                    Calendar.MONTH
+                ) + 1) + "-" + toDateCalendar!!.get(Calendar.DAY_OF_MONTH)
+                todate.setText(toDate);
+            }
+
+        toDatePicker = DatePickerDialog(
+            this,
+            toDatePickerListener,
+            toDateCalendar!!.get(Calendar.YEAR),
+            toDateCalendar!!.get(Calendar.MONTH),
+            toDateCalendar!!.get(Calendar.DAY_OF_MONTH)
+        )
+
         add.setOnClickListener {
             startActivity(
                 Intent(activity, Schedule_Meeting::class.java)
                     .putExtra("from","Add")
             )
+        }
+
+        search_date.setOnClickListener {
+            filter="from"
+
+
+
+            fromDatePicker!!.show();
+        }
+
+        todate.setOnClickListener {
+            filter="to"
+
+            toDatePicker!!.show();
+        }
+
+
+        textView34.setOnClickListener {
+            search_date.setText("")
+            todate.setText("")
+        }
+
+
+
+        swiperefresh.setOnRefreshListener {
+            search_date.setText("")
+            todate.setText("")
+            onResume()
+            // This method performs the actual data-refresh operation.
+            // The method calls setRefreshing(false) when it's finished.
         }
 
        /* srchtxt.setOnKeyListener { view, i, keyEvent ->
@@ -86,13 +180,7 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener {
             srchtxt.setText("")
             getEODs("")
         }
-        swiperefresh.setOnRefreshListener {
-            Log.i("refresh", "onRefresh called from SwipeRefreshLayout")
-            srchtxt.setText("")
-            getEODs("")
-            // This method performs the actual data-refresh operation.
-            // The method calls setRefreshing(false) when it's finished.
-        }*/
+        */
 
 
     }
@@ -189,179 +277,16 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener {
         }
     }
 
-    /* fun getEODs(search: String){
-         eodlist.clear()
-         adp()
-         if (Appconstants.net_status(this)) {
-             //getEOD().execute()
-             val objs = JsonObject()
-             objs.addProperty("trip",pref!!.getString("tid","")!!)//"9791981428"
-             objs.addProperty("status",search)
-             objs.addProperty("from",search_date.text.toString().trim())
-             objs.addProperty("to",todate.text.toString().trim())
-             println("obj : "+objs)
-             pDialog =Dialog(activity)
-             Appconstands.loading_show(activity, pDialog).show()
-             val call = ApproveUtils.Get.getEod(pref!!.getString("tid","")!!,search_date.text.toString().trim(),todate.text.toString().trim(),search)
-             call.enqueue(object : Callback<Resp_trip> {
-                 override fun onResponse(call: Call<Resp_trip>, response: Response<Resp_trip>) {
-                     Log.e("responce", response.toString())
-                     if (response.isSuccessful()) {
-                         val example = response.body() as Resp_trip
-                         println(example)
-                         if (example.getStatus() == "Success") {
-                             //eodlist = JSONArray()
-
-                             for (r in 0 until example.getResponse()!!.size) {
-                                 val dt = EOD_data()
-                                 val obj = JSONObject()
-                                 val persons = JSONArray()
-                                 val res = example.getResponse()!!.get(r)
-                                 val id =  res.id!!
-                                 val state = if (res.state.isNullOrEmpty()) "" else res.state!!
-                                 val city = if (res.city.isNullOrEmpty()) "" else res.city!!
-                                 val customer_id = if (res.customer_id.isNullOrEmpty()) "" else res.customer_id!!
-                                 val cname = if (res.cname.isNullOrEmpty()) "" else res.cname!!
-                                 val mmob = if (res.mmob.isNullOrEmpty()) "" else res.mmob!!
-                                 val email = if (res.email.isNullOrEmpty()) "" else res.email!!
-                                 val maddress = if (res.maddress.isNullOrEmpty()) "" else res.maddress!!
-                                 val etval = if (res.tval.isNullOrEmpty()) "" else res.tval!!
-                                 val sval = if (res.sval.isNullOrEmpty()) "" else res.sval!!
-                                 val sq_val = if (res.sq_val.isNullOrEmpty()) "" else res.sq_val!!
-                                 val intime = if (res.intime.isNullOrEmpty()) "" else res.intime!!
-                                 val outtime = if (res.outtime.isNullOrEmpty()) "" else res.outtime!!
-                                 val magcapacity = if (res.magcapacity.isNullOrEmpty()) "" else res.magcapacity!!
-                                 val turnover = if (res.turnover.isNullOrEmpty()) "" else res.turnover!!
-                                 val ctype = if (res.ctype.isNullOrEmpty()) "" else res.ctype!!
-                                 val cpro = if (res.cpro.isNullOrEmpty()) "" else res.cpro!!
-                                 val scomm = if (res.scomm.isNullOrEmpty()) "" else res.scomm!!
-                                 val plike = if (res.plike.isNullOrEmpty()) "" else res.plike!!
-                                 val pcomnt = if (res.pcomnt.isNullOrEmpty()) "" else res.pcomnt!!
-                                 val exfeed = if (res.exfeed.isNullOrEmpty()) "" else res.exfeed!!
-                                 val roomloc = if (res.roomloc.isNullOrEmpty()) "" else res.roomloc!!
-                                 val spur = if (res.spur.isNullOrEmpty()) "" else res.spur!!
-                                 val created_at = if (res.createdAt.isNullOrEmpty()) "" else res.createdAt!!
-                                 //obj.put("trip_id",trip_id)
-
-                                 if (!res.persons.isNullOrEmpty()){
-                                     for (p in 0 until res.persons!!.size){
-                                         val ob = JSONObject()
-                                         val data = res.persons!!.get(p)
-                                         val ids = data.id!!
-                                         val trip_id = if (data.trip_id.isNullOrEmpty())"" else data.trip_id!!
-                                         val eod = if (data.eod.isNullOrEmpty())"" else data.eod!!
-                                         val name = if (data.name.isNullOrEmpty())"" else data.name!!
-                                         val designation = if (data.designation.isNullOrEmpty())"" else data.designation!!
-                                         val mobile = if (data.mobile.isNullOrEmpty())"" else data.mobile!!
-                                         ob.put("id",ids)
-                                         ob.put("trip_id",trip_id)
-                                         ob.put("eod",eod)
-                                         ob.put("name",name)
-                                         ob.put("mob",mobile)
-                                         ob.put("desig",designation)
-                                         persons.put(ob)
-                                     }
-                                 }
-                                 obj.put("id",id)
-                                 obj.put("state",state)
-                                 obj.put("city",city)
-                                 obj.put("customer_id",customer_id)
-                                 obj.put("cname",cname)
-                                 obj.put("mmob",mmob)
-                                 obj.put("email",email)
-                                 obj.put("maddress",maddress)
-                                 obj.put("tval",etval)
-                                 obj.put("sval",sval)
-                                 obj.put("sq_val",sq_val)
-                                 obj.put("intime",intime)
-                                 obj.put("outtime",outtime)
-                                 obj.put("magcapacity",magcapacity)
-                                 obj.put("turnover",turnover)
-                                 obj.put("ctype",ctype)
-                                 obj.put("cpro",cpro)
-                                 obj.put("scomm",scomm)
-                                 obj.put("plike",plike)
-                                 obj.put("pcomnt",pcomnt)
-                                 obj.put("exfeed",exfeed)
-                                 obj.put("roomloc",roomloc)
-                                 obj.put("spur",spur)
-                                 obj.put("persons",persons)
-                                 obj.put("created_at",created_at)
-
-                                 dt.customerID = customer_id
-                                 dt.cname = cname
-                                 dt.mmob = mmob
-                                 dt.maddress = maddress
-                                 dt.city = city
-                                 dt.email = email
-                                 dt.state = state
-                                 dt.tval = etval
-                                 dt.sval = sval
-                                 dt.intime = intime
-                                 dt.outtime = outtime
-                                 dt.magcapacity = magcapacity
-                                 dt.ctype = ctype
-                                 dt.cpro = cpro
-                                 dt.scomm = scomm
-                                 dt.plike = plike
-                                 dt.pcomnt = pcomnt
-                                 dt.exfeed = exfeed
-                                 dt.roomloc = roomloc
-                                 dt.spur = spur
-                                 dt.createdAt = created_at
-                                 dt.jsonobject = obj
-                                 eodlist.add(dt)
-                                 //eodlist.put(obj)
-                                 adp()
-                             }
-                         } else {
-                             Toast.makeText(activity, example.getMessage(), Toast.LENGTH_SHORT).show()
-                         }
-                     }
-                     else{
-                     }
-                     adp()
-                     pDialog.dismiss()
-                     swiperefresh.isRefreshing=false
-                 }
-
-                 override fun onFailure(call: Call<Resp_trip>, t: Throwable) {
-                     Log.e("areacode Fail response", t.toString())
-                     if (t.toString().contains("time")) {
-                         Toast.makeText(
-                                 activity,
-                                 "Poor network connection",
-                                 Toast.LENGTH_LONG
-                         ).show()
-                     }
-                     adp()
-                     pDialog.dismiss()
-                     swiperefresh.isRefreshing=false
-                 }
-             })
-         }
-         else{
-             swiperefresh.isRefreshing=false
-             Toast.makeText(
-                     activity,
-                     "You're offline",
-                     Toast.LENGTH_LONG
-             ).show()
-         }
-     }*/
-
     override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-        /*if(callin.visibility==View.VISIBLE){
-            callin.visibility=View.GONE
-            search_date.text.clear()
-            todate.text.clear()
+        if(search_date.text.isNotEmpty()||todate.text.toString().isNotEmpty()){
+            search_date.setText("")
+            todate.setText("")
             getEODs("")
         }
         else{
             finish()
-        }*/
+
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -370,8 +295,6 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener {
         inflater.inflate(R.menu.search, menu)
         val searchViewItem = menu.findItem(R.id.action_search)
         searchView = MenuItemCompat.getActionView(searchViewItem) as SearchView
-
-
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -394,7 +317,8 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener {
                             Log.e("pos",eodlists[i].cname.toString())
                             if (eodlists[i].cname!!.toString().toLowerCase().contains(newText!!.toLowerCase())||
                                 eodlists[i].mmob!!.toString().toLowerCase().contains(newText!!.toLowerCase())||
-                                eodlists[i].tval!!.toString().toLowerCase().contains(newText!!.toLowerCase())) {
+                                eodlists[i].tval!!.toString().toLowerCase().contains(newText!!.toLowerCase())||
+                                eodlists[i].sval!!.toString().toLowerCase().contains(newText!!.toLowerCase())) {
                                 val data= EOD_data()
                                 data.cname = eodlists[i].cname
                                 data.customerID = eodlists[i].customerID.toString()
@@ -411,11 +335,11 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener {
                             // memberslist.adapter = adp
 
                             if(eodlistsdup.isEmpty()){
-                                textView23.visibility=View.VISIBLE
+                                nodata.visibility=View.VISIBLE
 
                             }
                             else{
-                                textView23.visibility=View.GONE
+                                nodata.visibility=View.GONE
 
                             }
 
@@ -452,11 +376,11 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener {
                     // memberslist.adapter = adp
 
                     if (eodlists.isEmpty()) {
-                        textView23.visibility = View.VISIBLE
+                        nodata.visibility = View.VISIBLE
 
                     }
                     else{
-                        textView23.visibility=View.GONE
+                        nodata.visibility=View.GONE
 
                     }
 
@@ -603,6 +527,12 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener {
 
     }
 
+    fun filters(){
+        if(search_date.text.toString().isNotEmpty()&&todate.text.toString().isNotEmpty()){
+
+        }
+    }
+
     fun adp(){
         adp = EODAdap(activity,eodlists,activity)
         recyclerview.adapter = adp
@@ -639,4 +569,31 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener {
         var jsonobject : JSONObject? = null
     }
 
-}
+
+
+    override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
+        if(filter=="from") {
+            myYear = p1
+            myday = p3
+            myMonth = p2
+            search_date.setText(
+                myday.toString() + "-" + (myMonth+1).toString() + "-" +
+                        myYear.toString()
+            );
+            getEODs("")
+        }
+        else{
+            myYear1 = p1
+            myday1 = p3
+            myMonth1 = p2
+            todate.setText(
+                myday1.toString() + "-" + (myMonth1+1).toString() + "-" +
+                        myYear1.toString()
+            );
+            getEODs("")
+
+        }
+
+    }
+    }
+

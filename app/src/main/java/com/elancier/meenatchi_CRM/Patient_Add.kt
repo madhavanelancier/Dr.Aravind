@@ -2,6 +2,7 @@ package com.elancier.meenatchi_CRM
 
 import android.app.ProgressDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -57,7 +58,8 @@ class Patient_Add : AppCompatActivity() {
     var DoctorName = java.util.ArrayList<String>()
     var userID=""
     var namePOS=0
-
+    internal var citynmarr: MutableList<String> = ArrayList()
+    internal var ctyidarr: MutableList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.patient_add)
@@ -72,6 +74,7 @@ class Patient_Add : AppCompatActivity() {
         pDialog = ProgressDialog(this)
         pDialog!!.setMessage("Processing...")
         pDialog.show()
+        citytypes("")
         Doctors()
 
         save.setOnClickListener {
@@ -80,7 +83,7 @@ class Patient_Add : AppCompatActivity() {
                 && husband_contact.text.toString().trim().isNotEmpty() && wifename.text.toString().trim()
                     .isNotEmpty()
                 && wife_contact.text.toString().trim()
-                    .isNotEmpty() && mrdnumber.text.toString().trim().isNotEmpty()
+                    .isNotEmpty() && mrdnumber.text.toString().trim().isNotEmpty()&&statespin.selectedItemPosition!=0
             ) {
 
                 uploadMultiFile()
@@ -92,17 +95,20 @@ class Patient_Add : AppCompatActivity() {
                     husname.error = "Required field*"
                 }
                 if (husband_contact.text.toString().trim().length < 10) {
-                    husband_contact.error = "Required field*"
+                    husband_contact.error = "Invalid Mobile Number*"
                 }
                 if (wifename.text.toString().trim().isEmpty()) {
                     wifename.error = "Required field*"
                 }
                 if (wife_contact.text.toString().trim().length<10) {
-                    wife_contact.error = "Required field*"
+                    wife_contact.error = "Invalid Mobile Number*"
                 }
 
                 if (mrdnumber.text.toString().trim().isEmpty()) {
                     mrdnumber.error = "Required field*"
+                }
+                if (statespin.selectedItemPosition==0) {
+                    Toast.makeText(applicationContext, "Please select city", Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -191,6 +197,71 @@ class Patient_Add : AppCompatActivity() {
         }
     }
 
+    fun citytypes(state: String) {
+        if (Appconstants.net_status(this)) {
+            citynmarr.clear()
+            ctyidarr.clear()
+            val call: Call<Resp_trip>
+            call = ApproveUtils.Get.getcities()
+            call.enqueue(object : Callback<Resp_trip> {
+                override fun onResponse(call: Call<Resp_trip>, response: Response<Resp_trip>) {
+                    Log.e("areacode responce", response.toString())
+                    if (response.isSuccessful()) {
+                        val example = response.body() as Resp_trip
+                        println(example)
+                        if (example.getStatus() == "Success") {
+
+                            citynmarr.add("Select City")
+                            ctyidarr.add("0")
+                            //  textView23.visibility= View.GONE
+                            var otpval = example.getResponse()
+                            for (i in 0 until otpval!!.size) {
+                                val id = otpval[i].id.toString()
+                                val type = otpval[i].name.toString()
+                                citynmarr.add(type)
+                                ctyidarr.add(id)
+
+                            }
+                            val spin = ArrayAdapter(
+                                this@Patient_Add,
+                                R.layout.support_simple_spinner_dropdown_item,
+                                citynmarr
+                            )
+                            statespin.adapter = spin
+                            pDialog.dismiss()
+
+                        } else {
+                            Toast.makeText(applicationContext, (example.getMessage().toString()), Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+
+                    }
+                }
+
+                override fun onFailure(call: Call<Resp_trip>, t: Throwable) {
+                    Log.e("areacode Fail response", t.toString())
+                    if (t.toString().contains("time")) {
+                        Toast.makeText(
+                            this@Patient_Add,
+                            "Poor network connection",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+
+                    }
+                }
+            })
+        } else {
+            Toast.makeText(
+                this@Patient_Add,
+                "You're offline",
+                Toast.LENGTH_LONG
+            ).show()
+
+        }
+    }
+
+
     private fun uploadMultiFile() {
         var progressDialog =  ProgressDialog(this);
         progressDialog.setMessage("Creating Patient...");
@@ -206,6 +277,7 @@ class Patient_Add : AppCompatActivity() {
             builder.addProperty("reference_id",reference.text.toString())
             builder.addProperty("mrd_number",mrdnumber.text.toString())
             builder.addProperty("notes",notes.text.toString())
+            builder.addProperty("city",ctyidarr[statespin.selectedItemPosition].toString())
 
             val file = File("")
         Log.e("request",builder.toString())
@@ -245,7 +317,7 @@ class Patient_Add : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        exit()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -258,96 +330,111 @@ class Patient_Add : AppCompatActivity() {
             else -> return super.onOptionsItemSelected(item)
         }
     }
-       /* pDialog = Dialog(activity)
-        pref = activity.getSharedPreferences("MyPref", 0)
-        editor = pref!!.edit()
+
+    fun exit(){
+        val alert=androidx.appcompat.app.AlertDialog.Builder(this)
+        alert.setTitle("Exit?")
+        alert.setMessage("Are you sure want to exit?")
+        alert.setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i ->
+            finish()
+        })
+        alert.setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i ->
+            dialogInterface.dismiss()
+        })
+        val popup=alert.create()
+        popup.show()
+    }
+
+    /* pDialog = Dialog(activity)
+     pref = activity.getSharedPreferences("MyPref", 0)
+     editor = pref!!.edit()
 
 
 
-        val bundle = intent.extras!!
-        if (!bundle.getString("edit").isNullOrEmpty()){
-            ab!!.title = "Edit EOD"
-            val res = JSONObject(bundle.getString("edit"))
-            eid = if (res.has("id")) res.getString("id") else ""
-             estate = if (res.has("state")) res.getString("state") else ""
-             ecity = if (res.has("city")) res.getString("city") else ""
-            cid = if (res.has("customer_id")) res.getString("customer_id") else ""
-            val ecname = if (res.has("cname")) res.getString("cname") else ""
-            val emmob = if (res.has("mmob")) res.getString("mmob") else ""
-            val eemail = if (res.has("email")) res.getString("email") else ""
-            val emaddress = if (res.has("maddress")) res.getString("maddress") else ""
-            val esval = if (res.has("sval")) res.getString("sval") else ""
-            val esq_val = if (res.has("sq_val")) res.getString("sq_val") else ""
-            val eintime = if (res.has("intime")) res.getString("intime") else ""
-            val eouttime = if (res.has("outtime")) res.getString("outtime") else ""
-            val emagcapacity = if (res.has("magcapacity")) res.getString("magcapacity") else ""
-            val eturnover = if (res.has("turnover")) res.getString("turnover") else ""
-            val etval = if (res.has("tval")) res.getString("tval") else ""
-            val ectype = if (res.has("ctype")) res.getString("ctype") else ""
-            val ecpro = if (res.has("cpro")) res.getString("cpro") else ""
-            val escomm = if (res.has("scomm")) res.getString("scomm") else ""
-            val eplike = if (res.has("plike")) res.getString("plike") else ""
-            val epcomnt = if (res.has("pcomnt")) res.getString("pcomnt") else ""
-            val eexfeed = if (res.has("exfeed")) res.getString("exfeed") else ""
-            val eroomloc = if (res.has("roomloc")) res.getString("roomloc") else ""
-            val espur = if (res.has("spur")) res.getString("spur") else ""
-            persons = if (res.has("persons")) res.getJSONArray("persons") else JSONArray()
-            val ct = ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, activity.resources.getStringArray(R.array.custtype))
-            val cp = ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, activity.resources.getStringArray(R.array.custpros))
-            val pur = ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, activity.resources.getStringArray(R.array.season))
-            //state.setText(estate)
-            //city.setText(ecity)
-            cname.setText(ecname)
-            mmob.setText(emmob)
-            email.setText(eemail)
-            maddress.setText(emaddress)
-            tval.setText(esval)
-            sqval.setText(esq_val)
-            intime.setText(eintime)
-            outtime.setText(eouttime)
-            magcapacity.setText(emagcapacity)
-            turnover.setText(etval)
-            ctype.setSelection(ct.getPosition(ectype))
-            cpro.setSelection(cp.getPosition(ecpro))
-            scomm.setText(escomm)
-            plike.setText(eplike)
-            pcomnt.setText(epcomnt)
-            exfeed.setText(eexfeed)
-            roomloc.setText(eroomloc)
-            spur.setSelection(pur.getPosition(espur))
+     val bundle = intent.extras!!
+     if (!bundle.getString("edit").isNullOrEmpty()){
+         ab!!.title = "Edit EOD"
+         val res = JSONObject(bundle.getString("edit"))
+         eid = if (res.has("id")) res.getString("id") else ""
+          estate = if (res.has("state")) res.getString("state") else ""
+          ecity = if (res.has("city")) res.getString("city") else ""
+         cid = if (res.has("customer_id")) res.getString("customer_id") else ""
+         val ecname = if (res.has("cname")) res.getString("cname") else ""
+         val emmob = if (res.has("mmob")) res.getString("mmob") else ""
+         val eemail = if (res.has("email")) res.getString("email") else ""
+         val emaddress = if (res.has("maddress")) res.getString("maddress") else ""
+         val esval = if (res.has("sval")) res.getString("sval") else ""
+         val esq_val = if (res.has("sq_val")) res.getString("sq_val") else ""
+         val eintime = if (res.has("intime")) res.getString("intime") else ""
+         val eouttime = if (res.has("outtime")) res.getString("outtime") else ""
+         val emagcapacity = if (res.has("magcapacity")) res.getString("magcapacity") else ""
+         val eturnover = if (res.has("turnover")) res.getString("turnover") else ""
+         val etval = if (res.has("tval")) res.getString("tval") else ""
+         val ectype = if (res.has("ctype")) res.getString("ctype") else ""
+         val ecpro = if (res.has("cpro")) res.getString("cpro") else ""
+         val escomm = if (res.has("scomm")) res.getString("scomm") else ""
+         val eplike = if (res.has("plike")) res.getString("plike") else ""
+         val epcomnt = if (res.has("pcomnt")) res.getString("pcomnt") else ""
+         val eexfeed = if (res.has("exfeed")) res.getString("exfeed") else ""
+         val eroomloc = if (res.has("roomloc")) res.getString("roomloc") else ""
+         val espur = if (res.has("spur")) res.getString("spur") else ""
+         persons = if (res.has("persons")) res.getJSONArray("persons") else JSONArray()
+         val ct = ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, activity.resources.getStringArray(R.array.custtype))
+         val cp = ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, activity.resources.getStringArray(R.array.custpros))
+         val pur = ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, activity.resources.getStringArray(R.array.season))
+         //state.setText(estate)
+         //city.setText(ecity)
+         cname.setText(ecname)
+         mmob.setText(emmob)
+         email.setText(eemail)
+         maddress.setText(emaddress)
+         tval.setText(esval)
+         sqval.setText(esq_val)
+         intime.setText(eintime)
+         outtime.setText(eouttime)
+         magcapacity.setText(emagcapacity)
+         turnover.setText(etval)
+         ctype.setSelection(ct.getPosition(ectype))
+         cpro.setSelection(cp.getPosition(ecpro))
+         scomm.setText(escomm)
+         plike.setText(eplike)
+         pcomnt.setText(epcomnt)
+         exfeed.setText(eexfeed)
+         roomloc.setText(eroomloc)
+         spur.setSelection(pur.getPosition(espur))
 
-            personadap = PersonsAdapter(activity, persons, activity)
-            person_list.adapter=personadap
-        }
+         personadap = PersonsAdapter(activity, persons, activity)
+         person_list.adapter=personadap
+     }
 
-        personadap = PersonsAdapter(activity, persons, activity)
-        person_list.adapter=personadap
-        add_person.setOnClickListener {
-            Person_Popup(null)
-        }
+     personadap = PersonsAdapter(activity, persons, activity)
+     person_list.adapter=personadap
+     add_person.setOnClickListener {
+         Person_Popup(null)
+     }
 
-        state
-        city
-        cname
-        mmob
-        email
-        maddress
-        tval
-        sqval
-        intime
-        outtime
-        magcapacity
-        turnover
-        ctype
-        cpro
-        scomm
-        plike
-        pcomnt
-        exfeed
-        roomloc
-        spur
+     state
+     city
+     cname
+     mmob
+     email
+     maddress
+     tval
+     sqval
+     intime
+     outtime
+     magcapacity
+     turnover
+     ctype
+     cpro
+     scomm
+     plike
+     pcomnt
+     exfeed
+     roomloc
+     spur
 
-      *//*  selectcus.setOnClickListener {
+   *//*  selectcus.setOnClickListener {
 
         }*//*
 

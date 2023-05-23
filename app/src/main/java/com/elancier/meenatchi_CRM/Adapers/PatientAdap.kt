@@ -35,7 +35,8 @@ class PatientAdap(private val context: Context, private val CentreArrays: ArrayL
 
                 holder.nm.setText(CentreArrays[position].cname.toString())//(CentreArrays.getJSONObject(position).getString("cname"))
                 holder.mob.setText("MRD No: "+CentreArrays[position].mmob.toString())//(CentreArrays.getJSONObject(position).getString("mmob"))
-                holder.doctor.setText("Doctor: "+CentreArrays[position].doctor.toString()+", "+CentreArrays[position].city.toString())//(CentreArrays.getJSONObject(position).getString("mmob"))
+                holder.doctor.setText("Doctor: "+CentreArrays[position].doctor.toString()+", "+CentreArrays[position].sval.toString())//(CentreArrays.getJSONObject(position).getString("mmob"))
+                holder.location.setText(CentreArrays[position].city.toString())//(CentreArrays.getJSONObject(position).getString("mmob"))
                 holder.tval.setText(
                     CentreArrays[position].cname.toString().substring(0)
                         .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() })//(if(CentreArrays.getJSONObject(position).has("tval")) CentreArrays.getJSONObject(position).getString("tval") else "")
@@ -87,8 +88,9 @@ class PatientAdap(private val context: Context, private val CentreArrays: ArrayL
             mob = rowView.findViewById(R.id.textView88) as TextView
             tval = rowView.findViewById(R.id.firstletter) as TextView
             //tval = rowView.findViewById(R.id.days) as TextView
+            location = rowView.findViewById(R.id.city) as TextView
             doctor = rowView.findViewById(R.id.textView89) as TextView
-            /*location = rowView.findViewById(R.id.textView52) as TextView
+            /*
             pldate = rowView.findViewById(R.id.textView57) as TextView
             targetval = rowView.findViewById(R.id.textView57) as TextView
             daysval = rowView.findViewById(R.id.days) as TextView

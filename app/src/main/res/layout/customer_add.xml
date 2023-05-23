@@ -231,15 +231,30 @@
                             app:srcCompat="@drawable/ic_bag"
                             tools:ignore="VectorDrawableCompat" />
 
-                        <Spinner
-                            android:id="@+id/specialization"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="8dp"
-                            android:background="@drawable/spinnerstyle" />
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/specialization"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@drawable/spinnerstyle" />
+
+                            <TextView
+                                android:id="@+id/specErr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Select Specialization*"
+                                android:textColor="@color/red"
+                                android:visibility="gone" />
+                        </LinearLayout>
 
 
                     </LinearLayout>
@@ -393,7 +408,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="16dp"
                             android:layout_marginBottom="8dp"
-                            android:hint="Location">
+                            android:hint="Location Pin">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/pinloc"
@@ -469,15 +484,30 @@
                             android:tint="@color/colorAccent"
                             app:srcCompat="@drawable/baseline_location_city_24" />
 
-                        <Spinner
-                            android:id="@+id/statespin"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="8dp"
-                            android:background="@drawable/spinnerstyle" />
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/statespin"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@drawable/spinnerstyle" />
+
+                            <TextView
+                                android:id="@+id/cityErr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Select City*"
+                                android:textColor="@color/red"
+                                android:visibility="gone" />
+                        </LinearLayout>
 
                     </LinearLayout>
                     <LinearLayout
@@ -636,12 +666,13 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_weight="2"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/textView8"
@@ -654,6 +685,16 @@
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp"
                             android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/imageErr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:padding="4dp"
+                            android:text="Please select atleast one image*"
+                            android:textColor="@color/red"
+                            android:visibility="gone" />
 
                         <Button
                             android:id="@+id/button3"

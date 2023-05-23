@@ -137,7 +137,8 @@ class Patient_list : AppCompatActivity(),PatientAdap.OnItemClickListener {
                                 patient.cname = if (res.wife_name.isNullOrEmpty()) "" else res.wife_name!!
                                 patient.mmob = if (res.mrd_number.isNullOrEmpty()) "" else res.mrd_number!!
                                 patient.doctor = if (res.doctor_name.isNullOrEmpty()) "" else res.doctor_name!!
-                                patient.city = if (res.hospital_name.isNullOrEmpty()) "" else res.hospital_name!!
+                                patient.sval = if (res.hospital_name.isNullOrEmpty()) "" else res.hospital_name!!
+                                patient.city = if (res.city_name.isNullOrEmpty()) "" else res.city_name!!
                                 eodlists.add(patient)
                                 //eodlist.put(obj)
                                 adp()
@@ -222,12 +223,14 @@ class Patient_list : AppCompatActivity(),PatientAdap.OnItemClickListener {
                             Log.e("pos",eodlists[i].cname.toString())
                             if (eodlists[i].cname!!.toString().toLowerCase().contains(newText!!.toLowerCase())||
                                 eodlists[i].mmob!!.toString().toLowerCase().contains(newText!!.toLowerCase())||
-                                eodlists[i].doctor!!.toString().toLowerCase().contains(newText!!.toLowerCase())) {
+                                eodlists[i].doctor!!.toString().toLowerCase().contains(newText!!.toLowerCase())||
+                                eodlists[i].city!!.toString().toLowerCase().contains(newText!!.toLowerCase())) {
                                 val data= EOD_data()
                                 data.cname = eodlists[i].cname
                                 data.customerID = eodlists[i].customerID.toString()
                                 data.mmob = eodlists[i].mmob.toString()
                                 data.doctor = eodlists[i].doctor.toString()
+                                data.sval = eodlists[i].sval.toString()
                                 data.city = eodlists[i].city.toString()
 
                                 eodlistsdup.add(data)

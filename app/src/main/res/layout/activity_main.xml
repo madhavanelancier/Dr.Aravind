@@ -706,6 +706,45 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/logoutCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView56cust"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_dup"
+                            android:drawableLeft="@drawable/baseline_logout_24"
+                            android:drawableRight="@mipmap/rightarrow"
+                            android:drawablePadding="8dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center|start"
+                            android:padding="10dp"
+                            android:singleLine="false"
+                            android:text="Logout"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="20sp"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -795,13 +834,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
             android:fontFamily="@font/roboto"
             android:lineSpacingExtra="4dp"
             android:padding="4dp"
             android:text="Employee Name"
             android:textColor="@color/colorAccent"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toBottomOf="@+id/frameLayout"
             card_view:layout_constraintEnd_toEndOf="@+id/textView50"
@@ -812,18 +850,17 @@
 
         <TextView
             android:id="@+id/textView83"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/button_back_white"
-            android:gravity="center"
-            android:padding="8dp"
-            android:paddingBottom="4dp"
-            android:text="Edit Profile"
-            android:textColor="@color/white"
-            android:visibility="gone"
+            android:gravity="center|start"
+            android:textColor="@color/blue_900"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/textView51"
             card_view:layout_constraintStart_toStartOf="@+id/textView51"
             card_view:layout_constraintTop_toBottomOf="@+id/textView51" />
+
 
         <Button
             android:id="@+id/button2"
@@ -862,7 +899,7 @@
                 android:maxLength="1"
                 android:text="M"
                 android:textColor="@android:color/white"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
         </FrameLayout>

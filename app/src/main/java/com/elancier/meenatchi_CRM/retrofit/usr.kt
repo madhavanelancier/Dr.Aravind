@@ -248,7 +248,10 @@ interface usr {
     fun addMeeting( @Body fam:JsonObject): Call<ResponseBody?>?
 
     @POST("meeting/edit/{api_key}")
-    fun editMeeting( @Path("api_key")trip : String): Call<ResponseBody?>?
+    fun editMeeting( @Path("api_key")trip : String,@Body fam:JsonObject): Call<ResponseBody?>?
+
+    @POST("meeting/feedback/{api_key}")
+    fun editFeedback( @Path("api_key")trip : String,@Body fam:JsonObject): Call<ResponseBody?>?
     @FormUrlEncoded
     @POST("profile_update")
     fun getprofile(
@@ -528,6 +531,9 @@ nominee_signature*/
 
     @GET("patient/list/{api_key}")
     fun getPatients(@Path("api_key")trip : String):Call<Resp_trip>
+
+    @GET("doctor/view/{api_key}")
+    fun getDoctor(@Path("api_key")trip : String):Call<Resp_trip>
 
     @GET("meeting/list/{api_key}/{from}/{to}")
     fun getMeetings(@Path("api_key")trip : String,@Path("from")from : String,@Path("to")to : String):Call<Resp_trip>

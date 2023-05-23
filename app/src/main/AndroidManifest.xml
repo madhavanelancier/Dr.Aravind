@@ -22,6 +22,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:name=".TestApplication"
@@ -37,7 +38,9 @@
         android:theme="@style/AppThemes"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-
+        <activity
+            android:name=".FullScreen"
+            android:exported="false" />
         <activity
             android:name=".Frontsheet"
             android:screenOrientation="portrait"
@@ -227,17 +230,18 @@
             android:name=".Patient_Add"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemes" />
-        <activity android:name=".Travel_list"
+        <activity
+            android:name=".Travel_list"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemes"
-            />
-        <activity android:name=".Patient_list"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".Patient_list"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemes"/>
-
-        <activity android:name=".GetLocation_Admin"
+            android:theme="@style/AppThemes" />
+        <activity
+            android:name=".GetLocation_Admin"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemes"/>
+            android:theme="@style/AppThemes" />
 
         <receiver
             android:name=".AlarmReceiver"
@@ -247,6 +251,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -259,6 +264,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <service
             android:name=".service.FetchAddressIntentService"
             android:exported="false" />
