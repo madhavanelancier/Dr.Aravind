@@ -27,6 +27,11 @@ import retrofit2.Response
 import java.io.File
 import java.util.*
 import android.text.format.DateFormat;
+import android.view.Gravity
+import kotlinx.android.synthetic.main.patient_add.*
+import kotlinx.android.synthetic.main.schedule_meeting.fname
+import kotlinx.android.synthetic.main.schedule_meeting.save
+import kotlinx.android.synthetic.main.schedule_meeting.statespin
 
 class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     val activity = this
@@ -50,7 +55,7 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
     var CentresArrays = java.util.ArrayList<OrderDetail>()
     var DoctorName = java.util.ArrayList<String>()
     var userID=""
-    var namePOS=0
+    var namePOS=-1
     var day = 0
     var month = 0
     var year= 0
@@ -143,11 +148,35 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
                 && statespin.selectedItemPosition!=0) {
 
                 if(from=="Add") {
-                    AddMeeting()
+                    for(i in 0 until DoctorName.size){
+                        if(DoctorName[i].contains(fname.text.toString())){
+                            namePOS=i
+                            AddMeeting()
+                        }
+                        else{
+
+                        }
+                    }
+                    if(namePOS==-1){
+                        toast("Invalid Doctor Name")
+                        fname.setError("Invalid Doctor Name")
+                    }
                 }
                 else
                 {
-                    EditMeeting()
+                    for(i in 0 until DoctorName.size){
+                        if(DoctorName[i].contains(fname.text.toString())){
+                            namePOS=i
+                            EditMeeting()
+                        }
+                        else{
+
+                        }
+                    }
+                    if(namePOS==-1){
+                        toast("Invalid Doctor Name")
+                        fname.setError("Invalid Doctor Name")
+                    }
                 }
 
             } else {
@@ -179,6 +208,11 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
             datePickerDialog.show()
         }
 
+    }
+    fun toast(msg:String){
+        val t=Toast.makeText(applicationContext,msg,Toast.LENGTH_LONG)
+        t.setGravity(Gravity.CENTER,0,0)
+        t.show()
     }
     private fun AddMeeting() {
         var progressDialog =  ProgressDialog(this);
@@ -393,15 +427,22 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
         myHour = p1;
         myMinute = p2;
         var ampm=""
+        var mymins=""
         if(myHour>=12){
             ampm="PM"
         }
         else if(myHour<12){
             ampm="AM"
         }
+        if(myMinute<10){
+            mymins="0"+myMinute
+        }
+        else{
+            mymins=myMinute.toString()
+        }
         meeting.setText(myday.toString()+"-" + (myMonth+1).toString() + "-" +
             myYear.toString() + " " +
             myHour.toString() + ":" +
-             myMinute.toString()+" "+ampm);
+                mymins.toString()+" "+ampm);
     }
 }

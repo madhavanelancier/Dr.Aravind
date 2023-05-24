@@ -8,6 +8,7 @@ import android.content.SharedPreferences
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -28,6 +29,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -58,10 +60,12 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener,DatePickerDialo
     var filter=""
 
     private var fromDate: String? = null
+    private var fromDateDup: String? = null
     private var fromDatePicker: DatePickerDialog? = null
     private var fromDatePickerListener: OnDateSetListener? = null
     private var fromDateCalendar: Calendar? = null
     private var toDate: String? = null
+    private var toDateDup: String? = null
     private var toDatePicker: DatePickerDialog? = null
     private var toDatePickerListener: OnDateSetListener? = null
     private var toDateCalendar: Calendar? = null
@@ -96,8 +100,11 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener,DatePickerDialo
                     fromDateCalendar!!.get(Calendar.YEAR).toString() + "-" + (fromDateCalendar!!.get(
                         Calendar.MONTH
                     ) + 1) + "-" + fromDateCalendar!!.get(Calendar.DAY_OF_MONTH)
+                fromDateDup=fromDateCalendar!!.get(Calendar.DAY_OF_MONTH).toString()+"/"+(fromDateCalendar!!.get(Calendar.MONTH) + 1).toString() + "/" +fromDateCalendar!!.get(Calendar.YEAR)
                 search_date.setText(fromDate);
-                toDatePicker!!.datePicker.minDate = fromDateCalendar!!.getTimeInMillis()
+                search_date.setError(null)
+
+                //toDatePicker!!.datePicker.minDate = fromDateCalendar!!.getTimeInMillis()
             }
         fromDatePicker = DatePickerDialog(
             this,
@@ -118,7 +125,34 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener,DatePickerDialo
                 toDate = toDateCalendar!!.get(Calendar.YEAR).toString() + "-" + (toDateCalendar!!.get(
                     Calendar.MONTH
                 ) + 1) + "-" + toDateCalendar!!.get(Calendar.DAY_OF_MONTH)
-                todate.setText(toDate);
+
+                toDateDup=toDateCalendar!!.get(Calendar.DAY_OF_MONTH).toString()+"/"+(toDateCalendar!!.get(Calendar.MONTH) + 1).toString() + "/" +toDateCalendar!!.get(Calendar.YEAR)
+
+
+                try {
+                    val formatter = SimpleDateFormat("dd/MM/yyyy")
+                    val str1 = fromDateDup
+                    val date1 = formatter.parse(str1!!)
+                    val str2 = toDateDup
+                    Log.e("str1",date1.toString())
+                    val date2 = formatter.parse(str2!!)
+                    Log.e("str2",date2.toString())
+
+                    if (date2!!.after(date1)) {
+                        todate.setText(toDate);
+                        todate.setError(null)
+                        onResume()
+
+                    }
+                    else{
+                        todate.setError("To date is not less than from date")
+                        val toast=Toast.makeText(applicationContext,"To date is not less than from date" , Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.CENTER,0,0)
+                        toast.show()
+                    }
+                } catch (e1: ParseException) {
+                    e1.printStackTrace()
+                }
             }
 
         toDatePicker = DatePickerDialog(
@@ -138,22 +172,27 @@ class Eod_list : AppCompatActivity(),EODAdap.OnItemClickListener,DatePickerDialo
 
         search_date.setOnClickListener {
             filter="from"
-
-
-
             fromDatePicker!!.show();
         }
 
         todate.setOnClickListener {
-            filter="to"
-
-            toDatePicker!!.show();
+            if(search_date.text.isNotEmpty()) {
+                filter = "to"
+                toDatePicker!!.show();
+            }
+            else{
+                search_date.setError("Please select from date")
+                val toast=Toast.makeText(applicationContext,"Please select from date" , Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER,0,0)
+                toast.show()
+            }
         }
 
 
         textView34.setOnClickListener {
             search_date.setText("")
             todate.setText("")
+            onResume()
         }
 
 

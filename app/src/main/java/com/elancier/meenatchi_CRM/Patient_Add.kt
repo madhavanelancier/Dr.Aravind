@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
@@ -57,7 +58,7 @@ class Patient_Add : AppCompatActivity() {
     var CentresArrays = java.util.ArrayList<OrderDetail>()
     var DoctorName = java.util.ArrayList<String>()
     var userID=""
-    var namePOS=0
+    var namePOS=-1
     internal var citynmarr: MutableList<String> = ArrayList()
     internal var ctyidarr: MutableList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,7 +87,19 @@ class Patient_Add : AppCompatActivity() {
                     .isNotEmpty() && mrdnumber.text.toString().trim().isNotEmpty()&&statespin.selectedItemPosition!=0
             ) {
 
-                uploadMultiFile()
+                for(i in 0 until DoctorName.size){
+                    if(DoctorName[i].contains(fname.text.toString())){
+                        namePOS=i
+                        uploadMultiFile()
+                    }
+                    else{
+
+                    }
+                }
+                if(namePOS==-1){
+                    toast("Invalid Doctor Name")
+                    fname.setError("Invalid Doctor Name")
+                }
             } else {
                 if (fname.text.toString().trim().isEmpty()) {
                     fname.error = "Required field*"
@@ -111,6 +124,7 @@ class Patient_Add : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Please select city", Toast.LENGTH_SHORT).show()
                 }
 
+
             }
         }
 
@@ -129,6 +143,12 @@ class Patient_Add : AppCompatActivity() {
             }
         })
 
+    }
+
+    fun toast(msg:String){
+        val t=Toast.makeText(applicationContext,msg,Toast.LENGTH_LONG)
+        t.setGravity(Gravity.CENTER,0,0)
+        t.show()
     }
 
     fun Doctors(){
