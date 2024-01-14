@@ -204,7 +204,7 @@ class Schedule_Meeting : AppCompatActivity(),DatePickerDialog.OnDateSetListener,
             day = calendar[Calendar.DAY_OF_MONTH]
             val datePickerDialog =
                 DatePickerDialog(this@Schedule_Meeting, this@Schedule_Meeting, year, month, day)
-            datePickerDialog.datePicker.setMaxDate(System.currentTimeMillis())
+            datePickerDialog.datePicker.setMinDate(System.currentTimeMillis())
             datePickerDialog.show()
         }
 

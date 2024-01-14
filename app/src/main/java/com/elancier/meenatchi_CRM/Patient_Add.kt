@@ -21,11 +21,11 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.customer_add.*
 import kotlinx.android.synthetic.main.patient_add.*
+import kotlinx.android.synthetic.main.patient_add.cityErr
 import kotlinx.android.synthetic.main.patient_add.fname
 import kotlinx.android.synthetic.main.patient_add.save
 import kotlinx.android.synthetic.main.patient_add.specialization
 import kotlinx.android.synthetic.main.patient_add.statespin
-import kotlinx.android.synthetic.main.request_add.*
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import org.json.JSONArray
@@ -122,6 +122,7 @@ class Patient_Add : AppCompatActivity() {
                 }
                 if (statespin.selectedItemPosition==0) {
                     Toast.makeText(applicationContext, "Please select city", Toast.LENGTH_SHORT).show()
+                    cityErr.visibility=View.VISIBLE
                 }
 
 
@@ -140,6 +141,23 @@ class Patient_Add : AppCompatActivity() {
                 }
                 println("Position $pos") //check it now in Logcat
                 namePOS=pos;
+            }
+        })
+
+        statespin.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>?,
+                selectedItemView: View,
+                position: Int,
+                id: Long
+            ) {
+                if(position!=0){
+                    cityErr.visibility=View.GONE
+                }
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+
             }
         })
 

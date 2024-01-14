@@ -617,6 +617,7 @@ class MainActivity : AppCompatActivity() {
                 progbar.show()
             }
             val json = JsonObject()
+            Log.e("idnew",id)
             json.addProperty("user_id", id/*pref!!.getString("cusid", "").toString()*/)
             json.addProperty("type", name)
             json.addProperty("location", district)

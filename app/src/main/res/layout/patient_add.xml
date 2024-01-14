@@ -500,15 +500,31 @@
                             android:tint="@color/colorAccent"
                             app:srcCompat="@drawable/baseline_location_city_24" />
 
-                        <Spinner
-                            android:id="@+id/statespin"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginBottom="8dp"
-                            android:background="@drawable/spinnerstyle" />
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/statespin"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@drawable/spinnerstyle" />
+
+                            <TextView
+                                android:id="@+id/cityErr"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Select City *"
+                                android:visibility="gone"
+                                android:textColor="@color/red"
+                                android:textStyle="bold" />
+                        </LinearLayout>
 
                     </LinearLayout>
 
