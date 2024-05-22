@@ -21,6 +21,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.elancier.meenatchi_CRM.Adapers.CampAdap
 import com.elancier.meenatchi_CRM.Adapers.MyFamilyAdap
 import com.elancier.meenatchi_CRM.DataClasses.CentresData
 import com.elancier.meenatchi_CRM.DataClasses.SpinnerPojo
@@ -168,6 +169,20 @@ class MainActivity : AppCompatActivity() {
             )
             //Editorders(0)
         }
+
+        campCard.setOnClickListener {
+            startActivity(
+                Intent(this@MainActivity, Camp_list::class.java)
+            )
+            //Editorders(0)
+        }
+
+        campCardList.setOnClickListener {
+            startActivity(
+                Intent(this@MainActivity, Camp_leads::class.java)
+            )
+        }
+
 
         logoutCard.setOnClickListener {
             AlertDialog.Builder(this)
@@ -1313,11 +1328,11 @@ class MainActivity : AppCompatActivity() {
                     if (example.status == "Success") {
                         var arr = example.message
                         var resp = example.response!![0]
-                        norders.setText(resp.doctors)
-                        orderval.setText(resp.patients)
-                        baln.setText(resp.meetings)
+                        norders.setText(resp.doctors.toString())
+                        orderval.setText(resp.patients.toString())
+                        baln.setText(resp.leadpatients.toString())
 
-                        if (resp.check_out.equals("1")) {
+                        if (resp.check_out.toString().equals("1")) {
                             checkin.visibility = View.GONE
                             checkout.visibility = View.VISIBLE
                         } else {

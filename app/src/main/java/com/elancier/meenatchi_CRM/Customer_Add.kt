@@ -494,8 +494,8 @@ class Customer_Add : AppCompatActivity() {
                     longstr=data.getStringExtra("longitude").toString()
                     address.setText(data.getStringExtra("location").toString())
                     pinloc.setText(data.getStringExtra("pincode").toString())
-                    pinloc.setError("")
-                    address.setError("")
+                    pinloc.setError(null)
+                    address.setError(null)
                 }
             }
         }

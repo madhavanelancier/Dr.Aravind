@@ -97,6 +97,14 @@ class Response_trip {
     @Expose
     var status: String? = null
 
+    @SerializedName("lat")
+    @Expose
+    var lat: String? = null
+
+    @SerializedName("long")
+    @Expose
+    var long: String? = null
+
     @SerializedName("brand")
     @Expose
     var brand: String? = null

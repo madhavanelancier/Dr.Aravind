@@ -242,6 +242,13 @@
             android:name=".GetLocation_Admin"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemes" />
+        <activity android:name=".Camp_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes" />
+
+        <activity android:name=".Camp_leads"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemes"/>
 
         <receiver
             android:name=".AlarmReceiver"

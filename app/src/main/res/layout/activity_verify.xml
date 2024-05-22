@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/vanitha_login_bg"
     android:focusableInTouchMode="true"
     tools:context=".LoginActivity">
 
@@ -37,7 +36,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@mipmap/logo_vanithamarket"
                     android:orientation="vertical">
 
 

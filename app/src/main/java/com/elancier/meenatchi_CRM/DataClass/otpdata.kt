@@ -18,6 +18,10 @@ class otpdata {
     @Expose
     var  email: String?  = null
 
+    @SerializedName("crm_att")
+    @Expose
+    var  crm_att: String?  = null
+
     @SerializedName("official_mobile")
     @Expose
     var  mobile: String?  = null
@@ -52,15 +56,19 @@ class otpdata {
 
     @SerializedName("doctors")
     @Expose
-    var  doctors: String?  = null
+    var  doctors: Int?  = null
 
     @SerializedName("meetings")
     @Expose
-    var  meetings: String?  = null
+    var  meetings: Int?  = null
+
+    @SerializedName("leadpatients")
+    @Expose
+    var  leadpatients: Int?  = null
 
     @SerializedName("patients")
     @Expose
-    var  patients: String?  = null
+    var  patients: Int?  = null
 
 
     @SerializedName("partial_image")
@@ -150,6 +158,45 @@ class otpdata {
     @Expose
     var  id: String?  = null
 
+    @SerializedName("locations")
+    @Expose
+    var  locations: String?  = null
+
+    @SerializedName("camp_location")
+    @Expose
+    var  camp_location: String?  = null
+
+    @SerializedName("camp")
+    @Expose
+    var  camp: String?  = null
+
+    @SerializedName("wife_name")
+    @Expose
+    var  wife_name: String?  = null
+
+    @SerializedName("husband_name")
+    @Expose
+    var  husband_name: String?  = null
+
+    @SerializedName("wife_no")
+    @Expose
+    var  wife_no: String?  = null
+
+    @SerializedName("husband_no")
+    @Expose
+    var  husband_no: String?  = null
+
+    @SerializedName("wife_age")
+    @Expose
+    var  wife_age: String?  = null
+
+    @SerializedName("husband_age")
+    @Expose
+    var  husband_age: String?  = null
+
+
+
+
 
     @SerializedName("community")
     @Expose
@@ -224,6 +271,7 @@ class otpdata {
     @SerializedName("date")
     @Expose
     var date: String? = null
+
     @SerializedName("loan")
     @Expose
     var loan: String? = null
@@ -242,7 +290,7 @@ class otpdata {
 
     @SerializedName("check_out")
     @Expose
-    var check_out: String? = null
+    var check_out: Int? = null
 
 
     @SerializedName("balance")
@@ -335,6 +383,12 @@ class otpdata {
     @SerializedName("week")
     @Expose
     var week: String? = null
+
+    @SerializedName("prefer_location")
+    @Expose
+    var prefer_location: String? = null
+
+
 
     @SerializedName("weeks")
     @Expose

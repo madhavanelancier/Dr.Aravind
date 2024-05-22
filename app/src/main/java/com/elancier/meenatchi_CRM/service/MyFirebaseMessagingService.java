@@ -185,10 +185,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            notificationBuilder.setSmallIcon(R.mipmap.logo_vanithamarket);
+            //notificationBuilder.setSmallIcon(R.mipmap.lo);
             //notificationBuilder.setColor(getResources().getColor(R.color.notification_color));
         } else {
-            notificationBuilder.setSmallIcon(R.mipmap.logo_vanithamarket);
+            //notificationBuilder.setSmallIcon(R.mipmap.logo_vanithamarket);
         }
         notificationBuilder.setContentTitle(getString(R.string.app_name))
                         .setStyle(bigPictureStyle)

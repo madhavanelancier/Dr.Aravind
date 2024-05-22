@@ -25,6 +25,18 @@ interface usr {
     fun getMemedit(@Url st : String): Call<Resp_Edit>
 
     @GET()
+    fun getpreferLocation(@Url st : String): Call<Resp_otp>
+
+    @POST("camplead/campleadCamplist")
+    fun getcamps(@Body fam:JsonObject): Call<Resp_otp>
+
+    @POST("camp")
+    fun getCamplist(@Body fam:JsonObject): Call<Resp_otp>
+
+    @POST("camplead/list")
+    fun getCampleads(@Body fam:JsonObject): Call<Resp_otp>
+
+    @GET()
     fun getMem2(@Url st : String): Call<Resp>
 
     @GET()
@@ -192,9 +204,9 @@ interface usr {
     @FormUrlEncoded
     @POST("customer_entry")
     fun getentry(
-        @Field("tid")username : String,
-        @Field("customer_id")customer_id:String,
-        @Field("notes")notes:String,
+        @Field("locations")username : String,
+        @Field("camp_location")customer_id:String,
+        @Field("date")notes:String,
         @Field("order_details")order_details:String,
         @Field("order_value")order_value:String,
         @Field("image")image:String,
@@ -202,6 +214,34 @@ interface usr {
         @Field("user")user:String
 
     ): Call<Resp_otp>
+
+
+    @FormUrlEncoded
+    @POST("campstore")
+    fun campstore(
+        @Field("user_id")user_id : String,
+        @Field("locations")username : String,
+        @Field("camp_location")customer_id:String,
+        @Field("date")notes:String
+
+    ): Call<Resp_otp>
+
+
+    @FormUrlEncoded
+    @POST("camplead/campleadstore")
+    fun campleadstore(
+        @Field("user_id")userid : String,
+        @Field("camp")username : String,
+        @Field("wife_name")wife_name : String,
+        @Field("husband_name")husband_name : String,
+        @Field("wife_no")wife_no : String,
+        @Field("husband_no")husband_no : String,
+        @Field("wife_age")customer_id:String,
+        @Field("husband_age")notes:String
+
+    ): Call<Resp_otp>
+
+
 
     @FormUrlEncoded
     @POST("add_request")
@@ -248,7 +288,7 @@ interface usr {
     fun addMeeting( @Body fam:JsonObject): Call<ResponseBody?>?
 
     @POST("meeting/edit/{api_key}")
-    fun editMeeting( @Path("api_key")trip : String,@Body fam:JsonObject): Call<ResponseBody?>?
+    fun editMeeting( @Path("api_key")trip : String,@Body fam:JsonObject): Call<Edit_Resp?>?
 
     @POST("meeting/feedback/{api_key}")
     fun editFeedback( @Path("api_key")trip : String,@Body fam:JsonObject): Call<ResponseBody?>?

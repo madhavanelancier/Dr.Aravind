@@ -1,29 +1,26 @@
 package com.elancier.meenatchi_CRM
 
+
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.database.Cursor
+import android.location.Criteria
 import android.location.Geocoder
 import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import android.os.*
-import android.provider.MediaStore
-import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import com.elancier.meenatchi_CRM.Appconstands.RequestPermissionCode
 import com.elancier.meenatchi_CRM.service.AppUtils
 import com.elancier.meenatchi_CRM.service.FetchAddressIntentService
-
-
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -34,9 +31,9 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_create_complaint_admin.*
 import kotlinx.android.synthetic.main.complaint_add_lay_admin.*
-
 import java.io.IOException
 import java.util.*
+
 
 class GetLocation_Admin : AppCompatActivity(), OnMapReadyCallback {
     private val RESULT_LOAD_IMAGE = 1
@@ -472,45 +469,119 @@ class GetLocation_Admin : AppCompatActivity(), OnMapReadyCallback {
 
         curr_lat=pref!!.getString("lat","").toString()
         curr_long=pref!!.getString("long","").toString()
-        val set = LatLng(curr_lat.toDouble(), curr_long.toDouble());
+        var set:LatLng?=null
+        try {
+            set = LatLng(curr_lat.toDouble(), curr_long.toDouble());
+            mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(set, 15f));
+            //mMap!!.animateCamera(CameraUpdateFactory.zoomTo(14.0f))
+            mMap!!.setOnCameraChangeListener { cameraPosition ->
+                var cameraPos : CameraPosition? = null
 
-        //"lat":"13.006529","lng":"80.2043947"
-        mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(set, 15f));
-        //mMap!!.animateCamera(CameraUpdateFactory.zoomTo(14.0f))
-        mMap!!.setOnCameraChangeListener { cameraPosition ->
-            var cameraPos : CameraPosition? = null
-
-            /*if (id!=""){
-                val data = db.Addressget(intent.extras!!.get("id").toString())
-                val set = LatLng(data.adrs_latitude.toString().toDouble(), data.adrs_longtitude.toString().toDouble());
-                //val set = LatLng(-33.867, 151.206);
-                mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(set, 20f));
-                cameraPos = CameraPosition.Builder()
-                    .target(set).zoom(20f)*//*.tilt(70f)*//*.build()
+                /*if (id!=""){
+                    val data = db.Addressget(intent.extras!!.get("id").toString())
+                    val set = LatLng(data.adrs_latitude.toString().toDouble(), data.adrs_longtitude.toString().toDouble());
+                    //val set = LatLng(-33.867, 151.206);
+                    mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(set, 20f));
+                    cameraPos = CameraPosition.Builder()
+                        .target(set).zoom(20f)*//*.tilt(70f)*//*.build()
                 id=""
             }else {*/
-            cameraPos = cameraPosition
-            //}
-            Log.d("Camera postion change" + "", cameraPosition.toString() + "")
-            mCenterLatLong = cameraPos!!.target
+                cameraPos = cameraPosition
+                //}
+                Log.d("Camera postion change" + "", cameraPosition.toString() + "")
+                mCenterLatLong = cameraPos!!.target
 
 
-            mMap!!.clear()
+                mMap!!.clear()
 
-            try {
+                try {
 
-                val mLocation = Location("")
-                mLocation.latitude = mCenterLatLong!!.latitude
-                mLocation.longitude = mCenterLatLong!!.longitude
+                    val mLocation = Location("")
+                    mLocation.latitude = mCenterLatLong!!.latitude
+                    mLocation.longitude = mCenterLatLong!!.longitude
 
-                startIntentService(mLocation)
-                ///mLocationMarkerText.text = "Lat : " + mCenterLatLong!!.latitude + "," + "Long : " + mCenterLatLong!!.longitude
-                //println("Lat : " + mCenterLatLong!!.latitude + "," + "Long : " + mCenterLatLong!!.longitude)
+                    startIntentService(mLocation)
+                    ///mLocationMarkerText.text = "Lat : " + mCenterLatLong!!.latitude + "," + "Long : " + mCenterLatLong!!.longitude
+                    //println("Lat : " + mCenterLatLong!!.latitude + "," + "Long : " + mCenterLatLong!!.longitude)
 
-            } catch (e: Exception) {
-                e.printStackTrace()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
+        catch(e:Exception){
+            val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+            val criteria = Criteria()
+
+            val location = locationManager.getLastKnownLocation(
+                locationManager.getBestProvider(
+                    criteria,
+                    false
+                )!!
+            )
+          /*  if (location != null) {
+                mMap!!.animateCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        LatLng(
+                            location.latitude,
+                            location.longitude
+                        ), 13f
+                    )
+                )
+                val cameraPosition = CameraPosition.Builder()
+                    .target(
+                        LatLng(
+                            location.latitude,
+                            location.longitude
+                        )
+                    ) // Sets the center of the map to location user
+                    .zoom(17f) // Sets the zoom
+                    .bearing(90f) // Sets the orientation of the camera to east
+                    .tilt(40f) // Sets the tilt of the camera to 30 degrees
+                    .build() // Creates a CameraPosition from the builder
+                mMap!!.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))*/
+
+                set = LatLng(location!!.latitude.toDouble(), location!!.longitude.toDouble());
+                mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(set, 15f));
+                //mMap!!.animateCamera(CameraUpdateFactory.zoomTo(14.0f))
+                mMap!!.setOnCameraChangeListener { cameraPosition ->
+                    var cameraPos : CameraPosition? = null
+
+                    /*if (id!=""){
+                        val data = db.Addressget(intent.extras!!.get("id").toString())
+                        val set = LatLng(data.adrs_latitude.toString().toDouble(), data.adrs_longtitude.toString().toDouble());
+                        //val set = LatLng(-33.867, 151.206);
+                        mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(set, 20f));
+                        cameraPos = CameraPosition.Builder()
+                            .target(set).zoom(20f)*//*.tilt(70f)*//*.build()
+                id=""
+            }else {*/
+                    cameraPos = cameraPosition
+                    //}
+                    Log.d("Camera postion change" + "", cameraPosition.toString() + "")
+                    mCenterLatLong = cameraPos!!.target
+
+
+                    mMap!!.clear()
+
+                    try {
+
+                        val mLocation = Location("")
+                        mLocation.latitude = mCenterLatLong!!.latitude
+                        mLocation.longitude = mCenterLatLong!!.longitude
+
+                        startIntentService(mLocation)
+                        ///mLocationMarkerText.text = "Lat : " + mCenterLatLong!!.latitude + "," + "Long : " + mCenterLatLong!!.longitude
+                        //println("Lat : " + mCenterLatLong!!.latitude + "," + "Long : " + mCenterLatLong!!.longitude)
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+            }
+        }
+
+        //"lat":"13.006529","lng":"80.2043947"
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION

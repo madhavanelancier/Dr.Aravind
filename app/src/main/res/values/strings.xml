@@ -97,6 +97,17 @@
         <item>Grandfather</item>
 
     </string-array>
-
+    <string name="loc">Location<font color='#FF0000'> *</font></string>
+    <string name="camp">Camp Location<font color='#FF0000'> *</font></string>
+    <string name="date">Date<font color='#FF0000'> *</font></string>
+    <string name="crm">CRM Attribute<font color='#FF0000'> *</font></string>
+    <string name="camplist">Camp List<font color='#FF0000'> *</font></string>
+    <string name="wifenm">Wife Name<font color='#FF0000'> *</font></string>
+    <string name="husnm">Husband Name<font color='#FF0000'> *</font></string>
+    <string name="wifenum">Wife Number<font color='#FF0000'> *</font></string>
+    <string name="husnum">Husband Number<font color='#FF0000'> *</font></string>
+    <string name="wifeage">Wife Age<font color='#FF0000'> *</font></string>
+    <string name="husage">Husband Age<font color='#FF0000'> *</font></string>
+    <string name="prefloc">Preferred Location<font color='#FF0000'> *</font></string>
 
 </resources>

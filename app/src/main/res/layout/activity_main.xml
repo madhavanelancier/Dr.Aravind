@@ -314,15 +314,17 @@
                             android:padding="8dp"
                             android:text="0"
                             android:textColor="@color/colorAccent"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             tools:ignore="VectorDrawableCompat" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="No.of Doctors"
-                            android:textColor="@color/gen_black" />
+                            android:text="Doctors"
+                            android:textColor="@color/gen_black"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -345,7 +347,8 @@
                             android:padding="8dp"
                             android:text="0"
                             android:textColor="@color/colorAccent"
-                            android:textSize="20sp"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             tools:ignore="VectorDrawableCompat" />
 
                         <TextView
@@ -353,8 +356,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="No.of Patients"
-                            android:textColor="@color/gen_black" />
+                            android:text="Patients"
+                            android:textColor="@color/gen_black"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -378,15 +382,17 @@
                             android:padding="8dp"
                             android:text="0"
                             android:textColor="@color/colorAccent"
-                            tools:ignore="VectorDrawableCompat"
-                            android:textSize="20sp" />
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:ignore="VectorDrawableCompat" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="Meetings"
-                            android:textColor="@color/gen_black" />
+                            android:text="Camps"
+                            android:textColor="@color/gen_black"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -394,7 +400,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     android:visibility="visible">
 
@@ -707,7 +713,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/logoutCard"
+                    android:id="@+id/campCard"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
@@ -715,6 +721,84 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView56camps"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_dup"
+                            android:drawableLeft="@mipmap/clinic"
+                            android:drawableRight="@mipmap/rightarrow"
+                            android:drawablePadding="8dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center|start"
+                            android:padding="10dp"
+                            android:singleLine="false"
+                            android:text="Camp"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="20sp"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/campCardList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView56campslist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/border_dup"
+                            android:drawableLeft="@mipmap/camplist"
+                            android:drawableRight="@mipmap/rightarrow"
+                            android:drawablePadding="8dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center|start"
+                            android:padding="10dp"
+                            android:singleLine="false"
+                            android:text="Camp Leads"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="20sp"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/logoutCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="40dp"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="8dp">
 

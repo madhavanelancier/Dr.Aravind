@@ -19,7 +19,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.elancier.domdox.Adapters.PersonsAdapter
 import com.elancier.meenatchi_CRM.retrofit.*
-import kotlinx.android.synthetic.main.activity_add__eod.*
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
@@ -33,7 +32,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import kotlinx.android.synthetic.main.meeting_add.*
+import kotlinx.android.synthetic.main.meeting_add.addresstxt
 import kotlinx.android.synthetic.main.meeting_add.fname
 import kotlinx.android.synthetic.main.meeting_add.save
 import kotlinx.android.synthetic.main.meeting_add.statespin
